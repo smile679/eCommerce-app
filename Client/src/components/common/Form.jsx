@@ -16,6 +16,7 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
     let element = null;
     const value = formData[getControlItem.name]; //this is an objects not an array [] uses to daynamicaly access our object
 
+    
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -46,11 +47,11 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
             }
           >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder={getControlItem.placeholder} />
+              <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
             <SelectContent>
-              {getControlItem.option && getControlItem.option > 0
-                ? getControlItem.option.map((optionItem) => (
+              {getControlItem.options && getControlItem.options.length > 0
+                ? getControlItem.options.map((optionItem) => (
                     <SelectItem key={optionItem.id} value={optionItem.id}>
                       {optionItem.label}
                     </SelectItem>
