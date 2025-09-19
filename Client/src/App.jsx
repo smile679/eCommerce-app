@@ -23,7 +23,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector((state)=> state.auth)
   const dispatch = useDispatch();
-  console.log(user);
+  // console.log(user);
+  
   useEffect(()=>{
     dispatch(checkAuth())
   },[dispatch])

@@ -23,7 +23,7 @@ const AuthLogin = ()=> {
         alert(data?.payload?.message)
       } else {
         alert(data?.payload?.message )
-        console.log(data?.payload?.success, data?.payload?.message);
+        // console.log(data?.payload?.success, data?.payload?.message);
       }
     }
   )
