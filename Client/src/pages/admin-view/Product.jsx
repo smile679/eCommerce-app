@@ -37,7 +37,7 @@ function AdminProducts() {
         open={openCreateProductsDialog}
         onOpenChange={()=>setOpenCreateProductsDialog(false)}
       >
-        <SheetContent side="right" className="overflow-auto">
+        <SheetContent side="right" className="overflow-auto px-5">
           <SheetHeader>
             <SheetTitle>Add New Product</SheetTitle>
           </SheetHeader>
