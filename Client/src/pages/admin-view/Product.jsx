@@ -24,8 +24,9 @@ const initialState = {
 function AdminProducts() {
   const [openCreateProductsDialog, setOpenCreateProductsDialog] = useState(false);
   const [formData, setFormData] = useState(initialState);
-  const [imageFile, setImageFile] = useState(null)
-  const [uploadedImageUrl, setUploadedImageUrl] = useState("")
+  const [imageFile, setImageFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [imageLoadingState, setImageLoadingState] = useState(false);
 
   return ( 
     <Fragment>
@@ -46,6 +47,7 @@ function AdminProducts() {
             setImageFile={setImageFile} 
             uploadedImageUrl={uploadedImageUrl} 
             setUploadedImageUrl={setUploadedImageUrl} 
+            setImageLoadingState={setImageLoadingState}
           />
           <div className="py-2">
             <CommonForm 

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import axios from 'axios';
 
 
-function ProductImageUpload({ imageFile ,setImageFile, uploadedImageUrl, setUploadedImageUrl }) {
+function ProductImageUpload({ imageFile ,setImageFile, uploadedImageUrl, setUploadedImageUrl, setImageLoadingState }) {
 
   const inputRef = useRef(null)
 
@@ -36,9 +36,11 @@ function ProductImageUpload({ imageFile ,setImageFile, uploadedImageUrl, setUplo
   }
 
   const uploadImageToCloudinary =async (imageFile)=>{
+    setImageLoadingState(true);
     const data = new FormData();
     data.append('file_path',imageFile);
     const response = await axios.post('http://localhost:5000/api/admin/products/upload-image', data);
+    setImageLoadingState(false);
     console.log(response.data.result.url);
     if(response.data.success) setUploadedImageUrl(response.data.result.url);
   }
