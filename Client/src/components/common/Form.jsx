@@ -8,15 +8,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Button } from '../ui/button'
+import { Button } from "../ui/button";
 
-function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData }) {
-
+function CommonForm({
+  formControls,
+  onSubmit,
+  buttonText,
+  formData,
+  setFormData,
+  isbtnDisabled
+}) {
   const renderInputByComponentType = (getControlItem) => {
     let element = null;
     const value = formData[getControlItem.name]; //this is an objects not an array [] uses to daynamicaly access our object
 
-    
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -29,7 +34,7 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
             onChange={(e) =>
               setFormData({
                 ...formData,
-                [getControlItem.name]: e.target.value, 
+                [getControlItem.name]: e.target.value,
               })
             }
           />
@@ -38,11 +43,12 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
 
       case "select":
         element = (
-          <Select value={value} 
-            onValueChange ={(value) =>
+          <Select
+            value={value}
+            onValueChange={(value) =>
               setFormData({
                 ...formData,
-                [getControlItem.name]: value, 
+                [getControlItem.name]: value,
               })
             }
           >
@@ -73,7 +79,7 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
             onChange={(e) =>
               setFormData({
                 ...formData,
-                [getControlItem.name]: e.target.value, 
+                [getControlItem.name]: e.target.value,
               })
             }
           />
@@ -90,7 +96,7 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
             onChange={(e) =>
               setFormData({
                 ...formData,
-                [getControlItem.name]: e.target.value, 
+                [getControlItem.name]: e.target.value,
               })
             }
           />
@@ -110,7 +116,7 @@ function CommonForm({ formControls, onSubmit, buttonText, formData, setFormData 
           </div>
         ))}
       </div>
-      <Button type="submit" className="mt-2 w-full">
+      <Button disabled={isbtnDisabled} type="submit" className="mt-2 w-full">
         {buttonText || "Submit"}
       </Button>
     </form>

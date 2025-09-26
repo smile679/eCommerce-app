@@ -19,7 +19,6 @@ const AuthLogin = ()=> {
     e.preventDefault()
     dispatch(loginUser(formData)).then((data)=>{
       if(data?.payload?.success){
-        console.log(data?.payload?.success);
         alert(data?.payload?.message)
       } else {
         alert(data?.payload?.message )
@@ -28,8 +27,6 @@ const AuthLogin = ()=> {
     }
   )
   }
-
-  console.log(formData)
    return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
