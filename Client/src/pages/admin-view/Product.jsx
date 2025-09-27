@@ -10,7 +10,7 @@ import CommonForm from "../../components/common/Form";
 import { addProductFormElements } from "../../config";
 import ProductImageUpload from "../../components/admin-view/image-upload";
 import { useDispatch, useSelector } from "react-redux";
-import { 
+import {
   fetchAllProducts, 
   addNewProduct,
   editProduct,

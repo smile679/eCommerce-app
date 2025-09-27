@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const authRouter = require('./routes/auth/auth-routes')
 const adminProductsRouter = require('./routes/admin/product-routes')
+const shopProductRouter = require('./routes/shop/products-routes')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/api/auth', authRouter)
 app.use('/api/admin/products', adminProductsRouter)
+app.use('/api/shop/products', shopProductRouter)
 
 
 app.listen(PORT, ()=>{
