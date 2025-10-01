@@ -17,13 +17,33 @@ import ShoppingProductTile from "../../components/shopping-view/ShoppingProductT
 
 function ShoppingListing() {
   const [sort, setSort] = useState(null);
-  const [filters, setFilters] = useState(null)
-  const dispatch = useDispatch()
-  const { productList } = useSelector(state=>state.shopProducts)
+  const dispatch = useDispatch();
+  const { productList } = useSelector(state=>state.shopProducts);
+  const [filters, setFilters] = useState({});
 
-  function handleFilter(){
+  function handleFilter(getSectionId, getCurrentOption){
     
-  }
+    let cpyFilters = { ...filters }
+    const indexOfCurrentSection = Object.keys(cpyFilters).indexOf(getSectionId)
+
+    if(indexOfCurrentSection === -1){
+        cpyFilters = { ...cpyFilters, [getSectionId] : [getCurrentOption] }
+    } else {
+        const indexOfCurrentOptions = cpyFilters[getSectionId].indexOf(getCurrentOption)
+
+        if(indexOfCurrentOptions === -1) cpyFilters[getSectionId].push(getCurrentOption)
+          else cpyFilters[getSectionId].splice(indexOfCurrentOptions, 1)
+    }
+
+  setFilters(cpyFilters)
+  sessionStorage.setItem('filters', JSON.stringify(cpyFilters))
+}
+  console.log(filters, 'filters')
+
+  useEffect(()=>{
+    setSort("price-lowtohigh")
+    setFilters(JSON.parse(sessionStorage.getItem('filters')) || {})
+  },[])
 
   useEffect(()=>{
     dispatch(fetchAllFilteredProducts())
@@ -31,7 +51,7 @@ function ShoppingListing() {
 
   return ( 
     <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 p-4">
-      <ProductFilter />
+      <ProductFilter handleFilter={handleFilter} filters={filters} />
       <div className="bg-background w-full rounded-lg shadow-sm">
         <div className="p-4 border-b flex items-center justify-between">
           <h2 className="text-lg font-extrabold">All Products</h2>
@@ -69,7 +89,7 @@ function ShoppingListing() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
             {
               productList && productList.length > 0 ?
-                productList.map(product=> <ShoppingProductTile product={product} />) : null
+                productList.map(product=> <ShoppingProductTile key={product.id} product={product} />) : null
             }
           </div>
       </div>
