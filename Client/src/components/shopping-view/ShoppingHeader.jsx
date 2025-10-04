@@ -15,7 +15,6 @@ import { logoutUser } from "../../store/authSlice";
 import { useDispatch } from 'react-redux'
 import { shoppingViewHeaderMenuItems } from "../../config";
 import { useSelector } from "react-redux";
-import { Label } from "../ui/label";
 
 function MenuItems() {
   const navigate = useNavigate();

@@ -21,6 +21,9 @@ import { checkAuth } from "./store/authSlice";
 import { Skeleton } from "@/components/ui/skeleton"
 
 function App() {
+  // const isAuthenticated = true
+  // const isLoading = false
+  // const user = null
   const { user, isAuthenticated, isLoading } = useSelector((state)=> state.auth)
   const dispatch = useDispatch();
   // console.log(user);

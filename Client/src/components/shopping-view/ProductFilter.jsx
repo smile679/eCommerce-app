@@ -23,7 +23,7 @@ function ProductFilter({ filters, handleFilter }) {
                       <Checkbox
                         checked={
                           filters &&
-                          Object.keys[filters].length > 0 &&
+                          Object.keys(filters).length > 0 &&
                           filters[keyItem] &&
                           filters[keyItem].indexOf(item.id) > -1
                         }
