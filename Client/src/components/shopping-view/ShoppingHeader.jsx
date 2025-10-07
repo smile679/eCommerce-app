@@ -15,6 +15,9 @@ import { logoutUser } from "../../store/authSlice";
 import { useDispatch } from 'react-redux'
 import { shoppingViewHeaderMenuItems } from "../../config";
 import { useSelector } from "react-redux";
+import UserCartWrapper from "./Cart-wrapper";
+import { useEffect, useState } from "react";
+import { fetchCartItems } from "../../store/shop/cart-slice";
 
 function MenuItems() {
   const navigate = useNavigate();
@@ -35,19 +38,27 @@ function MenuItems() {
 
 function HeaderRightContent() {
   const { user } = useSelector((state) => state.auth);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const [openCartSheet, setOpenCartSheet] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleLogout(){
     dispatch(logoutUser())
   }
 
+  useEffect(()=>{
+    dispatch(fetchCartItems(user.id))
+  },[dispatch])
+
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-5">
-      <Button>
-        <ShoppingCart className="w-6 h-6" />
-        <span className="sr-only">User Cart</span>
-      </Button>
+      <Sheet open={openCartSheet} onOpenChange={()=>setOpenCartSheet(false)}>
+        <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon'>
+          <ShoppingCart className="w-6 h-6" />
+          <span className="sr-only">User Cart</span>
+        </Button>
+        <UserCartWrapper />
+      </Sheet>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="bg-black cursor-pointer">

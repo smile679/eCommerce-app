@@ -17,11 +17,13 @@ import {
 } from "../../store/shop/products-slice";
 import ShoppingProductTile from "../../components/shopping-view/ShoppingProductTile";
 import { useSearchParams } from "react-router-dom";
-import ProductDetailsDialog from "../../components/shopping-view/productDetails";
+import ProductDetailsDialog from "../../components/shopping-view/ProductDetails";
+import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
 
 function ShoppingListing() {
   const [sort, setSort] = useState(null);
   const dispatch = useDispatch();
+  const { user } = useSelector(state=>state.auth)
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
@@ -31,8 +33,7 @@ function ShoppingListing() {
 
   function handleProductDetails(getProductId) {
     dispatch(fetchProductDetails(getProductId));
-    console.log(getProductId);
-    
+    // console.log(getProductId);
   }
 
   function createSearchParamsHelper(filterParams) {
@@ -66,6 +67,17 @@ function ShoppingListing() {
     setFilters(cpyFilters);
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
+
+  const handleAddToCart = (productId) => {
+      dispatch(addToCart({ userId: user.id, productId, quantity: 1 })).then(
+        (data) => {
+          console.log(data);
+          if(data?.payload?.success){
+            dispatch(fetchCartItems({userId: user.id}))
+          }
+        }
+      );
+    };
 
   useEffect(() => {
     if (filters && Object.keys(filters).length > 0) {
@@ -135,6 +147,7 @@ function ShoppingListing() {
                   key={product.id}
                   product={product}
                   handleProductDetails={handleProductDetails}
+                  handleAddToCart={handleAddToCart}
                 />
               ))
             : null}

@@ -8,7 +8,7 @@ import { StarIcon } from "lucide-react";
 
 function ProductDetailsDialog({ open, setOpen }) {
   const { productDetails } = useSelector((state) => state.shopProducts);
-    console.log(productDetails);
+    // console.log(productDetails);
     
   return (
     <Dialog open={open} onOpenChange={setOpen}>

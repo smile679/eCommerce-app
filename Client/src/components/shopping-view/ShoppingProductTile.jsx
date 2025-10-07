@@ -3,11 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "../../config";
 
-function ShoppingProductTile({ product, handleProductDetails }) {
-
+function ShoppingProductTile({ product, handleProductDetails, handleAddToCart }) {
+  
   return (
     <Card className="w-full max-w-sm mx-auto py-0">
-      <div onClick={()=>handleProductDetails(product?._id)}>
+      <div onClick={() => handleProductDetails(product?._id)}>
         <div className="relative">
           <img
             src={product?.image}
@@ -45,10 +45,15 @@ function ShoppingProductTile({ product, handleProductDetails }) {
             ) : null}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button className="w-full mb-3">Add to cart</Button>
-        </CardFooter>
       </div>
+      <CardFooter>
+        <Button
+          className="w-full mb-3"
+          onClick={() => handleAddToCart(product?._id)}
+        >
+          Add to cart
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

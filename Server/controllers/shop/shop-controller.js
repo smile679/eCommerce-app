@@ -5,10 +5,10 @@ const addToCartItem = async(req, res) => {
   const { userId, productId, quantity } = req.body;
 
   try {
-    if (!userId || !productId || !quantity <= 0 ) {
+    if (!userId || !productId || quantity <= 0 ) {
       return res.status(400).json({
         success: false,
-        message: "Invalide data provided!",
+        message: "Invalid data provided!",
       });
     }
 
