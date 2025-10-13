@@ -20,7 +20,7 @@ const addToCartItem = async(req, res) => {
       });
     }
 
-    const cart = await Cart.findOne({userId})
+    let cart = await Cart.findOne({userId})
       if (!cart) {
        cart = new Cart({
         userId,
@@ -91,12 +91,12 @@ const fetchCartItems =async(req, res) => {
         salePrice : item.productId.salePrice,
         quantity : item.quantity,
       }))
-
+      
     res.status(200).json({
       success : true,
       data : {
         ...cart._doc,
-        populateCartItem
+       items : populateCartItem,
       },
     })
 
@@ -143,7 +143,7 @@ const updateCartItemQty = async(req, res) => {
       select : "image title price salePrice"
     })
 
-     const populateCartItem = validItems.map(item=>({
+     const populateCartItem = cart.items.map(item=>({
         productId : item.productId ? item.productId._id : null,
         image : item.productId ? item.productId.image : null,
         title : item.productId ? item.productId.title : 'product not found!',
@@ -156,7 +156,7 @@ const updateCartItemQty = async(req, res) => {
       success : true,
       data : {
         ...cart._doc,
-        populateCartItem
+       items : populateCartItem
       },
     })
 
@@ -212,7 +212,7 @@ const deleteCartItem =async(req, res) => {
       success : true,
       data : {
         ...cart._doc,
-        populateCartItem
+       items : populateCartItem,
       },
     })
   } catch (error) {

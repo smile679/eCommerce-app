@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "../../config";
 
 function ShoppingProductTile({ product, handleProductDetails, handleAddToCart }) {
-  
+
   return (
     <Card className="w-full max-w-sm mx-auto py-0">
       <div onClick={() => handleProductDetails(product?._id)}>

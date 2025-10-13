@@ -18,19 +18,32 @@ import { useSelector } from "react-redux";
 import UserCartWrapper from "./Cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "../../store/shop/cart-slice";
+import { Label } from "../ui/label";
 
 function MenuItems() {
   const navigate = useNavigate();
+
+  function handleNavigate(getCurrentItem){
+    sessionStorage.removeItem('filters')
+    const currentItem = getCurrentItem.id !== 'home' &&  getCurrentItem.id !== 'products' ?
+    {
+      category : [getCurrentItem.id]
+    } : null;
+
+    sessionStorage.setItem('filters', JSON.stringify(currentItem))
+    navigate(getCurrentItem.path)
+  }
+
   return (
     <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
-        <Link
-          to={menuItem.path}
+        <Label
           key={menuItem.id}
-          className="text-sm font-medium cursor-pointer"
+          className="text-sm font-medium cursor-pointer hover:-translate-y-0.5"
+          onClick={()=>handleNavigate(menuItem)}
         >
           {menuItem.label}
-        </Link>
+        </Label>
       ))}
     </nav>
   );
@@ -47,7 +60,7 @@ function HeaderRightContent() {
   }
 
   useEffect(()=>{
-    dispatch(fetchCartItems(user.id))
+    dispatch(fetchCartItems({userId : user.id}))
   },[dispatch])
 
   return (
@@ -112,7 +125,7 @@ function ShoppingHeader() {
         <div className="hidden lg:block">
           <HeaderRightContent />
         </div>
-      </div>
+      </div> 
     </header>
   );
 }

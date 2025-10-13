@@ -68,15 +68,15 @@ function ShoppingListing() {
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
 
-  const handleAddToCart = (productId) => {
+  function handleAddToCart (productId){
       dispatch(addToCart({ userId: user.id, productId, quantity: 1 })).then(
         (data) => {
-          console.log(data);
           if(data?.payload?.success){
             dispatch(fetchCartItems({userId: user.id}))
+            alert(`Item successfully added`)
           }
         }
-      );
+      )
     };
 
   useEffect(() => {
@@ -155,7 +155,7 @@ function ShoppingListing() {
       </div>
       <ProductDetailsDialog
         open={openDetailsDialog}
-        setOpen={setOpenDetailsDialog}
+        setOpen={setOpenDetailsDialog} 
       />
     </div>
   );

@@ -1,17 +1,40 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { StarIcon } from "lucide-react";
+import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
+import { setProductDetails } from "../../store/shop/products-slice";
 
 function ProductDetailsDialog({ open, setOpen }) {
   const { productDetails } = useSelector((state) => state.shopProducts);
-    // console.log(productDetails);
-    
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  function handleAddToCart(productId) {
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId,
+        quantity: 1,
+      })
+    ).then((data) => {
+        if(data?.payload?.success){
+          dispatch(fetchCartItems({ userId :user?.id}))
+          alert('Item Added successfully')
+        }
+      })
+  }
+
+  function handleDialogClose(){
+    setOpen(false)
+    dispatch(setProductDetails())
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
         <div className="relative overflow-hidden rounded-lg">
           <img
@@ -45,46 +68,47 @@ function ProductDetailsDialog({ open, setOpen }) {
           </div>
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-0.5">
-              <StarIcon className="w-4 h-4 fill-primary"/>
-              <StarIcon className="w-4 h-4 fill-primary"/>
-              <StarIcon className="w-4 h-4 fill-primary"/>
-              <StarIcon className="w-4 h-4 fill-primary"/>
-              <StarIcon className="w-4 h-4 fill-primary"/>
+              <StarIcon className="w-4 h-4 fill-primary" />
+              <StarIcon className="w-4 h-4 fill-primary" />
+              <StarIcon className="w-4 h-4 fill-primary" />
+              <StarIcon className="w-4 h-4 fill-primary" />
+              <StarIcon className="w-4 h-4 fill-primary" />
             </div>
             <span className="text-muted-foreground">(4.5)</span>
           </div>
           <div className="mt-5 mb-5">
-            <Button className='w-full'>Add To Cart</Button>
+            <Button
+              className="w-full"
+              onClick={() => handleAddToCart(productDetails?._id)}
+            >
+              Add To Cart
+            </Button>
           </div>
           <Separator />
           <div className="max-h-[300px] overflow-auto">
             <h2 className="text-xl font-bold mb-4">Reviews</h2>
             <div className="grid gap-6">
-             <div className="flex gap-4">
+              <div className="flex gap-4">
                 <Avatar className="w-10 h-10 border">
-                  <AvatarFallback>
-                    SM
-                  </AvatarFallback>
+                  <AvatarFallback>SM</AvatarFallback>
                 </Avatar>
               </div>
-                <div className="grid gap-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-bold">samson gidey</h3>
-                  </div>
-                  <div className="flex items-center gap-0.5">
-                    <StarIcon className="w-4 h-4 fill-primary"/>
-                    <StarIcon className="w-4 h-4 fill-primary"/>
-                    <StarIcon className="w-4 h-4 fill-primary"/>
-                    <StarIcon className="w-4 h-4 fill-primary"/>
-                    <StarIcon className="w-4 h-4 fill-primary"/>
-                  </div>
-                  <p className="text-muted-foreground">
-                    This an awesome product
-                  </p>
+              <div className="grid gap-1">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold">samson gidey</h3>
                 </div>
+                <div className="flex items-center gap-0.5">
+                  <StarIcon className="w-4 h-4 fill-primary" />
+                  <StarIcon className="w-4 h-4 fill-primary" />
+                  <StarIcon className="w-4 h-4 fill-primary" />
+                  <StarIcon className="w-4 h-4 fill-primary" />
+                  <StarIcon className="w-4 h-4 fill-primary" />
+                </div>
+                <p className="text-muted-foreground">This an awesome product</p>
+              </div>
             </div>
-            <div className='mt-6 flex gap-2'>
-              <Input placeholder='Write a Review...'/>
+            <div className="mt-6 flex gap-2">
+              <Input placeholder="Write a Review..." />
               <Button>Submit</Button>
             </div>
           </div>
@@ -94,4 +118,4 @@ function ProductDetailsDialog({ open, setOpen }) {
   );
 }
 
-export default ProductDetailsDialog; 
+export default ProductDetailsDialog
