@@ -48,8 +48,8 @@ const fetchAllAddress = async(req, res) => {
     }
 
     const addressList = await Address.find({userId})
-    res.status(400).json({
-      success: false,   
+    res.status(200).json({
+      success: true,   
       data: addressList,
     })
     

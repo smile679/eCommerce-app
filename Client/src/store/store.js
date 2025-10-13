@@ -12,7 +12,7 @@ const store = configureStore({
     shopProducts : shoppingProductSlice,
     shopCart : shoppingCartSlice,
     shopAddress : shopAddressSlice,
-  }, 
+  },
 })
 
 export default store;
