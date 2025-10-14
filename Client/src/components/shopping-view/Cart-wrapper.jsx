@@ -2,9 +2,11 @@ import { useSelector } from "react-redux";
 import { Button } from "../ui/button";
 import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./UserCartItemContent";
+import { useNavigate } from "react-router-dom"
 
-function UserCartWrapper() {
+function UserCartWrapper({ setOpenCartSheet }) {
   const { cartItems } = useSelector((state) => state.shopCart);
+  const navigate = useNavigate()
 
   const totalCartAmount = cartItems && cartItems.length > 0 ?
   cartItems.reduce(
@@ -36,7 +38,12 @@ function UserCartWrapper() {
           <span className="font-bold">${totalCartAmount}</span>
         </div>
       </div>
-      <Button disabled={cartItems?.length < 1} className="w-full mt-5">
+      <Button onClick={()=>{
+        navigate('/shop/checkout')
+        setOpenCartSheet(false)
+      }} 
+      disabled={cartItems?.length < 1} 
+      className="w-full mt-5">
         Checkout
       </Button>
     </SheetContent>

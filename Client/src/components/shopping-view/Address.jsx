@@ -7,7 +7,6 @@ import { addNewAddress, deleteAddress, editAddress, fetchAllAddress } from "../.
 import AddressCard from "./Address-card";
 
 const initialFormData = {
-  userId: "",
   address: "",
   city: "",
   pincode: "",
@@ -24,7 +23,18 @@ function Address() {
 
   function handleManageAddress(e) {
     e.preventDefault();
-    addressList && addressList.length > 0 && !(addressList.length > 2)
+    currentEditedId !== null ?
+       dispatch(editAddress({  userId: user?.id, addressId : currentEditedId, formData, })).then(
+          (items) => {
+            if (items.payload?.success) {
+              dispatch(fetchAllAddress({ userId: user?.id }));
+              setFormData(initialFormData);
+              setCurrentEditedId(null)
+            }
+          }
+        ) :
+
+     addressList  && addressList.length < 3
       ? dispatch(addNewAddress({ ...formData, userId: user.id })).then(
           (items) => {
             if (items.payload?.success) {
@@ -33,7 +43,7 @@ function Address() {
             }
           }
         )
-      : alert(`You can't add more than 3 addresses`);
+      : alert(`You can't add more than 3 addresses`)
   }
 
   function isFormValid() {
@@ -53,6 +63,7 @@ function Address() {
   function handleEditAddress(getAddressInfo){
     setCurrentEditedId(getAddressInfo?._id)
     setFormData({ ...formData,
+      userId : getAddressInfo?.userId,
       address: getAddressInfo?.address,
       city: getAddressInfo?.city,
       pincode: getAddressInfo?.pincode,
@@ -63,24 +74,25 @@ function Address() {
 
   useEffect(() => {
     dispatch(fetchAllAddress({ userId: user.id }));
-  }, [dispatch]);
+  }, [dispatch])
 
   return (
     <Card>
       <div className="mb-5 p-3 grid grid-cols-2 md:grid-cols-3 gap-2">
         {addressList && addressList.length > 0
           ? addressList.map((items) => 
-          <AddressCard 
-            addressInfo={items} 
+          <AddressCard
+            addressInfo={items}
             handleEditAddress={handleEditAddress}
             handleDeleteAddress={handleDeleteAddress}
           />)
-          : null}
+          : null
+          }
       </div>
       <CardHeader>
         {
-          !currentEditedId ?
-        <CardTitle>Add New Address</CardTitle> : <CardTitle>Edit Address</CardTitle>
+          currentEditedId === null ?
+          <CardTitle>Add New Address</CardTitle> : <CardTitle>Edit Address</CardTitle>
         }
       </CardHeader>
       <CardContent className="space-y-3">
@@ -88,9 +100,9 @@ function Address() {
           formControls={addressFormControls}
           formData={formData}
           setFormData={setFormData}
-          buttonText={"Add"}
+          buttonText={ currentEditedId !== null ? "Edit" : "Add"}
           onSubmit={handleManageAddress}
-          // isbtnDisabled={!isFormValid()}
+          isbtnDisabled={!isFormValid()}
         />
       </CardContent>
     </Card>

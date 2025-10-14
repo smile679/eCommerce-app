@@ -4,7 +4,7 @@ import { Label } from "../ui/label";
 
 
 function AddressCard({addressInfo, handleEditAddress, handleDeleteAddress }) {
-  return ( 
+  return (
     <Card className='py-4 gap-4'>
       <CardContent className='grid p-4 gap-4'>
         <Label>ADDRESS : {addressInfo?.address}</Label>
@@ -18,7 +18,7 @@ function AddressCard({addressInfo, handleEditAddress, handleDeleteAddress }) {
         <Button onClick={()=>handleDeleteAddress(addressInfo?._id)}>Delete</Button>
       </CardFooter>
     </Card>
-   );
+   )
 }
 
 export default AddressCard;
