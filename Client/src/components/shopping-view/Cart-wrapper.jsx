@@ -8,8 +8,8 @@ function UserCartWrapper({ setOpenCartSheet }) {
   const { cartItems } = useSelector((state) => state.shopCart);
   const navigate = useNavigate()
 
-  const totalCartAmount = cartItems && cartItems.length > 0 ?
-  cartItems.reduce(
+  const totalCartAmount = cartItems && cartItems.items && cartItems.items.length > 0 ?
+  cartItems.items.reduce(
     (sum, currentItem) =>
       sum +
       (currentItem?.salePrice > 0
@@ -17,6 +17,7 @@ function UserCartWrapper({ setOpenCartSheet }) {
         : currentItem?.price) * currentItem?.quantity,
     0
   ) : 0 ;
+  
 
   return (
     <SheetContent className="sm:max-w-md px-4">

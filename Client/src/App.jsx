@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/authSlice";
 import { Skeleton } from "@/components/ui/skeleton"
+import { Loader2Icon, LoaderIcon } from "lucide-react";
 
 function App() {
   // const isAuthenticated = true
@@ -32,7 +33,12 @@ function App() {
     dispatch(checkAuth())
   },[dispatch])
 
-  if(isLoading) return <Skeleton className="w-[800px] bg-black rounded-full" />
+  if(isLoading) return <div className="w-full min-h-screen flex justify-center items-center">
+    <LoaderIcon role="status"
+      aria-label="Loading" width={30} height={30} className="items-center animate-spin"/>
+      Loading..
+  </div>
+  // <Skeleton className="w-[800px] bg-black rounded-full" />
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
