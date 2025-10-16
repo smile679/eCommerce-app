@@ -1,10 +1,15 @@
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "../ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
+import { Dialog } from "@radix-ui/react-dialog";
+import ShoppingOrdersDetailsView from "./Order-details";
+import { useState } from "react";
 
 
 
 function ShoppingOrders() {
+  const [ openDetailsDialog ,setOpenDetailsDialog ] = useState(false)
+
   return ( 
     <Card>
       <CardHeader>
@@ -30,9 +35,12 @@ function ShoppingOrders() {
               <TableCell>pending</TableCell>
               <TableCell>$1000</TableCell>
               <TableCell>
-                <Button> 
+                <Button onClick={()=>setOpenDetailsDialog(true)}> 
                   View Details
                 </Button>
+                <Dialog open={openDetailsDialog} onOpenChange={setOpenDetailsDialog}>
+                  <ShoppingOrdersDetailsView />
+                </Dialog>
               </TableCell>
             </TableRow>
           </TableBody>

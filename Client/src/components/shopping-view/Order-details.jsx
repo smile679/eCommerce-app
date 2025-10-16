@@ -1,16 +1,9 @@
 import { Label } from "../ui/label";
 import { DialogContent } from "../ui/dialog";
-import { useState } from "react";
-import CommonForm from "../common/Form";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-function AdminOrdersDetailsView() {
+function ShoppingOrdersDetailsView() {
 
-  const [ formData, setFormData ] = useState({status : ''})
-
-  function handleUpdateStatus(e){
-    e.preventDefault()
-  }
 
   return (
     <DialogContent className="sm:max-w[600px]">
@@ -58,33 +51,9 @@ function AdminOrdersDetailsView() {
             </div>
           </div>
         </div>
-        <div>
-          {
-            <CommonForm
-              formControls={[
-                {
-                  label: "Order Status",
-                  name: "status",
-                  componentType: "select",
-                  options: [
-                    { id: "pending", label: "Pending" },
-                    { id: "inProccess", label: "In Proccess" },
-                    { id: "inShipping", label: "In Shipping" },
-                    { id: "delivered", label: "Delivered" },
-                    { id: "rejected", label: "Rejected" },
-                  ]
-                }
-              ]}
-              formData={formData}
-              setFormData={setFormData}
-              buttonText={'Update Order Status'}
-              onSubmit={handleUpdateStatus}
-            />
-          }
-        </div>
       </div>
     </DialogContent>
   )
 }
 
-export default AdminOrdersDetailsView;
+export default ShoppingOrdersDetailsView;
