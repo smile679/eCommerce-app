@@ -8,6 +8,7 @@ const adminProductsRouter = require('./routes/admin/product-routes')
 const shopProductRouter = require('./routes/shop/products-routes')
 const shopCartRouter = require('./routes/shop/cart-routes')
 const shopAddressRouter = require('./routes/shop/address-routes')
+const shopOrderRouter = require('./routes/shop/order-routes')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,6 +35,7 @@ app.use('/api/admin/products', adminProductsRouter)
 app.use('/api/shop/products', shopProductRouter)
 app.use('/api/shop/cart', shopCartRouter) 
 app.use('/api/shop/address', shopAddressRouter)
+app.use('/api/shop/order', shopOrderRouter)
 
 
 app.listen(PORT, ()=>{
