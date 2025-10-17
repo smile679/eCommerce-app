@@ -35,7 +35,7 @@ function ShoppingOrders() {
               <TableCell>pending</TableCell>
               <TableCell>$1000</TableCell>
               <TableCell>
-                <Button onClick={()=>setOpenDetailsDialog(true)}> 
+                <Button onClick={()=>setOpenDetailsDialog(true)}>
                   View Details
                 </Button>
                 <Dialog open={openDetailsDialog} onOpenChange={setOpenDetailsDialog}>
