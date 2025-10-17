@@ -8,9 +8,8 @@ const OrderSchema = new mongoose.Schema({
       title : String,
       image : String,
       price : String,
-      salePrice : String,
       quantity : quantity,
-    }
+    } 
   ],
   addressInfo : {
     addressId : String,
