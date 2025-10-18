@@ -45,42 +45,42 @@ const createOrder = async (req, res) => {
     };
     
     paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
-          if (error) {
-            console.log(error);
-    
-            return res.status(500).json({
-              success: false,
-              message: "Error while creating paypal payment",
-            });
-          } else {
-            const newlyCreatedOrder = new Order({
-              userId,
-              cartId,
-              cartItems,
-              addressInfo,
-              orderStatus,
-              paymentMethod,
-              paymentStatus,
-              totalAmount,
-              orderDate,
-              orderUpdateDate,
-              paymentId,
-              payerId,
-            });
-    
-            await newlyCreatedOrder.save();
-    
-            const approvalURL = paymentInfo.links.find(
-              (link) => link.rel === "approval_url"
-            ).href;
-    
-            res.status(201).json({
-              success: true,
-              approvalURL,
-              orderId: newlyCreatedOrder._id,
-            });
-          }
-        });
+        if (error) {
+          console.log(error);
+  
+          return res.status(500).json({
+            success: false,
+            message: "Error while creating paypal payment",
+          });
+        } else {
+          const newlyCreatedOrder = new Order({
+            userId,
+            cartId,
+            cartItems,
+            addressInfo,
+            orderStatus,
+            paymentMethod,
+            paymentStatus,
+            totalAmount,
+            orderDate,
+            orderUpdateDate,
+            paymentId,
+            payerId,
+          });
+  
+          await newlyCreatedOrder.save();
+  
+          const approvalURL = paymentInfo.links.find(
+            (link) => link.rel === "approval_url"
+          ).href;
+  
+          res.status(201).json({
+            success: true,
+            approvalURL,
+            orderId: newlyCreatedOrder._id,
+          });
+        }
+      });
 
   } catch (error) {
     console.log(error);
