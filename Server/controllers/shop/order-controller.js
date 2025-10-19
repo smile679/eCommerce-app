@@ -1,5 +1,5 @@
-const paypal = require('../../helpers/paypal')
-const Order = require('../../models/Order')
+const paypal = require("../../helpers/paypal");
+const Order = require("../../models/Order");
 
 const createOrder = async (req, res) => {
   try {
@@ -18,8 +18,12 @@ const createOrder = async (req, res) => {
       payerId,
     } = req.body;
 
-    // const totalAmountNum = Number(totalAmount)
-
+    if (!Array.isArray(cartItems) || cartItems.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "cartItems required" 
+      });
+    }
 
     const create_payment_json = {
       intent: "sale",
@@ -49,45 +53,45 @@ const createOrder = async (req, res) => {
         },
       ],
     };
-    
-    paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
-        if (error) {
-          console.log(error);
-  
-          return res.status(500).json({
-            success: false,
-            message: "Error while creating paypal payment",
-          });
-        } else {
-          const newlyCreatedOrder = new Order({
-            userId,
-            cartId,
-            cartItems,
-            addressInfo,
-            orderStatus,
-            paymentMethod,
-            paymentStatus,
-            totalAmount,
-            orderDate,
-            orderUpdateDate,
-            paymentId,
-            payerId,
-          });
-  
-          await newlyCreatedOrder.save();
-  
-          const approvalURL = paymentInfo.links.find(
-            (link) => link.rel === "approval_url"
-          ).href;
-  
-          res.status(201).json({
-            success: true,
-            approvalURL,
-            orderId: newlyCreatedOrder._id,
-          });
-        }
-      });
 
+    paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({
+          success: false,
+          message: "Error while creating paypal payment",
+        });
+
+      } else {
+        const newlyCreatedOrder = new Order({
+          userId,
+          cartId,
+          cartItems,
+          addressInfo,
+          orderStatus,
+          paymentMethod,
+          paymentStatus,
+          totalAmount,
+          orderDate,
+          orderUpdateDate,
+          paymentId,
+          payerId,
+        });
+
+        await newlyCreatedOrder.save();
+
+        const approvalURL = paymentInfo.links.find(
+          (link) => link.rel === "approval_url"
+        ).href;
+
+        res.status(201).json({
+          success: true,
+          approvalURL,
+          orderId: newlyCreatedOrder._id,
+          paymentInfo,
+        });
+      }
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -96,12 +100,9 @@ const createOrder = async (req, res) => {
     });
   }
 };
-
 
 const capturePayment = async (req, res) => {
   try {
-
-    
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -111,5 +112,4 @@ const capturePayment = async (req, res) => {
   }
 };
 
-
-module.exports = { createOrder, capturePayment}
+module.exports = { createOrder, capturePayment };
