@@ -5,11 +5,14 @@ import UserCartItemsContent from "../../components/shopping-view/UserCartItemCon
 import { Button } from "../../components/ui/button";
 import { useState } from "react";
 import { createNewOrder } from "../../store/shop/order-slice";
+import { useEffect } from "react";
 
 function Checkout() {
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
+  const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress , setCurrentSelectedAddress] =  useState(null)
+  const [isPaymentStart, setIsPaymemntStart] =  useState(null)
   const dispatch = useDispatch()
 
   const totalCartAmount =
@@ -26,8 +29,6 @@ function Checkout() {
       0
     ) : 0
 
-    // console.log(currentSelectedAddress, 'currentSelectedAddress');
-    
     function handleInitiatePaypalPayment(){
       const orderData = {
         userId : user?.id,
@@ -57,11 +58,23 @@ function Checkout() {
         payerId : '',
       }
 
-      currentSelectedAddress ? 
-      dispatch(createNewOrder(orderData)).then(data=>console.log(data)
+      currentSelectedAddress ?
+      dispatch(createNewOrder(orderData)).then(data=>{
+        if(data?.payload?.success){
+          console.log(data);
+          setIsPaymemntStart(true)
+        } else {
+          setIsPaymemntStart(false)
+        }
+      }
       ) : alert('Please Add At Least address')
-      
     }
+
+    useEffect(()=>{
+      if(approvalURL){
+         window.location.href = approvalURL
+       }
+    }, [approvalURL])
 
   return (
     <div className="flex flex-col">
@@ -86,7 +99,7 @@ function Checkout() {
               </div>
             </div>
             <div className="mt-4 w-full">
-              <Button
+              <Button disabled={!cartItems?.items?.length > 0}
               onClick={()=>handleInitiatePaypalPayment()}
               className='w-full'>Checkout with paypal</Button>
             </div>

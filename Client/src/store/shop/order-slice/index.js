@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
-  approvalURI : null,
+  approvalURL : null,
   isLoading : false,
   orderId : null,
 }
@@ -26,14 +26,15 @@ const shoppingOrderSlice = createSlice({
       state.isLoading = true
     }).addCase(createNewOrder.fulfilled,(state, action)=>{
       state.isLoading = false,
-      state.approvalURI = action.payload?.approvalURL
+      state.approvalURL = action.payload?.approvalURL
       state.orderId = action.payload?.orderId
     }).addCase(createNewOrder.rejected,(state)=>{
       state.isLoading = false
-      state.approvalURI = null
+      state.approvalURL = null
       state.orderId = null
     })
   }
 })
 
-export default shoppingOrderSlice;
+
+export default shoppingOrderSlice.reducer;

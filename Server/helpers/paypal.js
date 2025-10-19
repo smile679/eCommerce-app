@@ -7,5 +7,4 @@ paypal.configure({
   client_secret : "EACRWgAcIYaBwffBJ7Qn1fj2chyqR_rokHGeyHT0khiP8MhXCQ03k8spsxTGGMdLxQHB7AiyaDDVFlVy",
 })
 
-
 module.exports = paypal

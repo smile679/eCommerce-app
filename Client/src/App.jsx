@@ -20,6 +20,8 @@ import { useEffect } from "react";
 import { checkAuth } from "./store/authSlice";
 import { Skeleton } from "@/components/ui/skeleton"
 import { Loader2Icon, LoaderIcon } from "lucide-react";
+import PaypalReturnPage from "./pages/shopping-view/Paypal-return";
+import PaypalCancelPage from "./pages/shopping-view/Paypal-cancel";
 
 function App() {
   // const isAuthenticated = true
@@ -70,6 +72,8 @@ function App() {
           <Route path="listing" element={<ShoppingListing />} />
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="account" element={<ShoppingAccount />} />
+          <Route path="paypal-return" element={<PaypalReturnPage />} />
+          <Route path="paypal-cancel" element={<PaypalCancelPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
         <Route path="/unauth-page" element={ <UnauthPage />} />
