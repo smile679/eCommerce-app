@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
   approvalURI : null,
@@ -6,7 +7,7 @@ const initialState = {
   orderId : null,
 }
 
-const createNewOrder = createAsyncThunk('/orders/createNewOrder',
+export const createNewOrder = createAsyncThunk('/orders/createNewOrder',
   async(orderData)=>{
     const response = await axios.post("http://localhost:5000/api/shop/order/create",
         orderData,
@@ -15,7 +16,6 @@ const createNewOrder = createAsyncThunk('/orders/createNewOrder',
     return response?.data
   }
 )
-
 
 const shoppingOrderSlice = createSlice({
   name : 'order',

@@ -1,19 +1,25 @@
+const paypal = require('../../helpers/paypal')
+const Order = require('../../models/Order')
 
 const createOrder = async (req, res) => {
   try {
     const {
       userId,
-      CartItems,
+      cartId,
+      cartItems,
       addressInfo,
       orderStatus,
       paymentMethod,
       paymentStatus,
       totalAmount,
-      orderData,
+      orderDate,
       orderUpdateDate,
       paymentId,
       payerId,
     } = req.body;
+
+    // const totalAmountNum = Number(totalAmount)
+
 
     const create_payment_json = {
       intent: "sale",

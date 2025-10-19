@@ -14,7 +14,7 @@ const initialFormData = {
   notes: "",
 };
 
-function Address() {
+function Address({ currentSelectedAddress ,setCurrentSelectedAddress}) {
   const [formData, setFormData] = useState(initialFormData);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -85,15 +85,14 @@ function Address() {
             addressInfo={items}
             handleEditAddress={handleEditAddress}
             handleDeleteAddress={handleDeleteAddress}
+            currentSelectedAddress={currentSelectedAddress}
+            setCurrentSelectedAddress={setCurrentSelectedAddress}
           />)
           : null
           }
       </div>
       <CardHeader>
-        {
-          currentEditedId === null ?
-          <CardTitle>Add New Address</CardTitle> : <CardTitle>Edit Address</CardTitle>
-        }
+        <CardTitle>{currentEditedId === null ? 'Add New Address' : 'Edit Address'} </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <CommonForm

@@ -2,13 +2,14 @@ const mongoose = require('mongoose')
 
 const OrderSchema = new mongoose.Schema({
   userId : String,
-  CartItems : [
+  cartId : String,
+  cartItems : [
     {
       productId : String,
       title : String,
       image : String,
       price : String,
-      quantity : quantity,
+      quantity : Number,
     } 
   ],
   addressInfo : {
@@ -23,7 +24,7 @@ const OrderSchema = new mongoose.Schema({
   paymentMethod : String,
   paymentStatus : String,
   totalAmount : Number,
-  orderData : Data,
+  orderDate : Date,
   orderUpdateDate : Date,
   paymentId : String,
   payerId : String,
