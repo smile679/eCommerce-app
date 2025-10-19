@@ -22,6 +22,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Loader2Icon, LoaderIcon } from "lucide-react";
 import PaypalReturnPage from "./pages/shopping-view/Paypal-return";
 import PaypalCancelPage from "./pages/shopping-view/Paypal-cancel";
+import PaymentSuccessPage from "./pages/shopping-view/Payment-success";
 
 function App() {
   // const isAuthenticated = true
@@ -73,6 +74,7 @@ function App() {
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="account" element={<ShoppingAccount />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
+          <Route path="payment-success" element={<PaymentSuccessPage />} />
           <Route path="paypal-cancel" element={<PaypalCancelPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
