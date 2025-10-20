@@ -92,7 +92,7 @@ function Address({ currentSelectedAddress ,setCurrentSelectedAddress}) {
           }
       </div>
       <CardHeader>
-        <CardTitle>{currentEditedId === null ? 'Add New Address' : 'Edit Address'} </CardTitle>
+        <CardTitle>{currentEditedId === null ? 'Add New Address' : 'Edit Address'}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <CommonForm

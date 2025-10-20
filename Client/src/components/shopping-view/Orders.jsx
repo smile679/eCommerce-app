@@ -4,12 +4,29 @@ import { Button } from "../ui/button";
 import { Dialog } from "@radix-ui/react-dialog";
 import ShoppingOrdersDetailsView from "./Order-details";
 import { useState } from "react";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllOrdersByUserId, getOrderDetails, resetOrderDetails } from "../../store/shop/order-slice";
 
 function ShoppingOrders() {
   const [ openDetailsDialog ,setOpenDetailsDialog ] = useState(false)
+  const  { user } = useSelector(state=>state.auth)
+  const  { orderList, orderDetails } = useSelector(state=>state.shopOrder)
+  const dispatch =useDispatch()
 
+  function handleFetchOrderDetail(getId){
+    dispatch(getOrderDetails(getId)).then(data=>console.log(data)
+    )
+  }
+
+  useEffect(()=>{
+    if(orderDetails !== null) setOpenDetailsDialog(true)
+  },[dispatch])
+
+  useEffect(()=>{
+    dispatch(getAllOrdersByUserId(user?.id))
+  },[dispatch])
+  
   return ( 
     <Card>
       <CardHeader>
@@ -29,20 +46,30 @@ function ShoppingOrders() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1245132</TableCell>
-              <TableCell>21/23/2024</TableCell>
-              <TableCell>pending</TableCell>
-              <TableCell>$1000</TableCell>
-              <TableCell>
-                <Button onClick={()=>setOpenDetailsDialog(true)}>
-                  View Details
-                </Button>
-                <Dialog open={openDetailsDialog} onOpenChange={setOpenDetailsDialog}>
-                  <ShoppingOrdersDetailsView />
-                </Dialog>
-              </TableCell>
-            </TableRow>
+            {
+              orderList && orderList?.length > 0 &&
+              orderList?.map(orderItem=>
+                <TableRow>
+                  <TableCell>{orderItem?._id}</TableCell>
+                  <TableCell>{orderItem?.orderDate.slice('T')[0]}</TableCell>
+                  <TableCell>{orderItem?.orderStatus}</TableCell>
+                  <TableCell>${orderItem?.totalAmount}</TableCell>
+                  <TableCell>
+                    <Button onClick={()=>handleFetchOrderDetail(orderItem?._id)}>
+                      View Details
+                    </Button>
+                    <Dialog 
+                      open={openDetailsDialog}
+                      onOpenChange={()=>{
+                        setOpenDetailsDialog(false)
+                        dispatch(resetOrderDetails())
+                      }}>
+                      <ShoppingOrdersDetailsView />
+                    </Dialog>
+                  </TableCell>
+                </TableRow>
+              )
+            }
           </TableBody>
         </Table>
       </CardContent>

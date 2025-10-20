@@ -1,9 +1,11 @@
 import { Label } from "../ui/label";
 import { DialogContent } from "../ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useSelector } from "react-redux";
+
 
 function ShoppingOrdersDetailsView() {
-
+  const  { orderDetails } = useSelector(state=>state.shopOrder)
 
   return (
     <DialogContent className="sm:max-w[600px]">
@@ -12,11 +14,11 @@ function ShoppingOrdersDetailsView() {
         <div className="grid gap-2">
           <div className="flex items-center justify-between mt-6">
             <p className="font-medium">Order Id</p>
-            <Label>123456</Label>
+            <Label>{orderDetails?._id}</Label>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="font-medium">Order Date</p>
-            <Label>28/23/2024</Label>
+            <Label>{orderDetails?.orderData}</Label>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="font-medium">Order Price</p>

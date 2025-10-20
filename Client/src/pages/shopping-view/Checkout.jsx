@@ -70,11 +70,11 @@ function Checkout() {
       ) : alert('Please Add At Least address')
     }
 
-    useEffect(()=>{
-      if(approvalURL){
-         window.location.href = approvalURL
-       }
-    }, [approvalURL])
+    // useEffect(()=>{
+    //   if(approvalURL){
+    //      window.location.href = approvalURL
+    //    }
+    // }, [approvalURL])
 
   return (
     <div className="flex flex-col">
