@@ -7,6 +7,6 @@ const {
 const router = express.Router();
 
 router.get("/get", getAllOrdersOfAllUsers);
-router.get("/get", getOrderDetailsForAdmin);
+router.get("/details/:id", getOrderDetailsForAdmin);
 
 module.exports = router;
