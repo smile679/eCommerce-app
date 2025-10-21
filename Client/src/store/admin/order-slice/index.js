@@ -1,5 +1,5 @@
-const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
-const { default: axios } = require("axios");
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import axios from "axios"
 
 const initialState = {
   isLoading : false,
@@ -7,7 +7,7 @@ const initialState = {
   orderDetails : null,
 }
 
-const getAllOrdersOfUsers = createAsyncThunk('orders/getAllOrdersOfUsers',
+export const getAllOrdersForAdmin = createAsyncThunk('orders/getAllOrdersForAdmin', 
   async()=>{
     const response =await axios('http://localhost:5000/api/admin/orders/get')
 
@@ -15,7 +15,7 @@ const getAllOrdersOfUsers = createAsyncThunk('orders/getAllOrdersOfUsers',
   }
 )
 
-const getOrderDetails = createAsyncThunk('orders/getAllOrdersOfUsers',
+export const getOrderDetailsForAdmin = createAsyncThunk('orders/getAllOrdersOfUsers',
   async(id)=>{
     const response =await axios(`http://localhost:5000/api/admin/orders/details/${id}`)
 
@@ -24,18 +24,34 @@ const getOrderDetails = createAsyncThunk('orders/getAllOrdersOfUsers',
 )
 
 const AdminOrderSlice = createSlice({
-  name : "adminOrder",
+  name : "adminOrderSlice",
   initialState,
-  reducers : {},
+  reducers : {
+    resetAdminOrderDetails : (state)=>{
+      state.orderDetails = null
+    }
+  },
   extraReducers : (builder)=>{
-    builder.addCase(getAllOrdersOfUsers.pending,(state)=>{
+    builder.addCase(getAllOrdersForAdmin.pending,(state)=>{
       state.isLoading = true
-    }).addCase(getAllOrdersOfUsers.fulfilled,(state, action)=>{
+    }).addCase(getAllOrdersForAdmin.fulfilled,(state, action)=>{
       state.isLoading = false
       state.orderList = action.payload?.data
-    }).addCase(getAllOrdersOfUsers.rejected,(state)=>{
+    }).addCase(getAllOrdersForAdmin.rejected,(state)=>{
       state.isLoading = false
       state.orderList = []
+    }).addCase(getOrderDetailsForAdmin.pending,(state)=>{
+      state.isLoading = true
+    }).addCase(getOrderDetailsForAdmin.fulfilled,(state, action)=>{
+      state.isLoading = false
+      state.orderDetails = action.payload?.data
+    }).addCase(getOrderDetailsForAdmin.rejected,(state)=>{
+      state.isLoading = false
+      state.orderDetails =null
     })
   }
 })
+
+
+export const { resetAdminOrderDetails } =  AdminOrderSlice.actions
+export default AdminOrderSlice.reducer

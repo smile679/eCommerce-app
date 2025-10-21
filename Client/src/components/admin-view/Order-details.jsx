@@ -3,15 +3,18 @@ import { DialogContent } from "../ui/dialog";
 import { useState } from "react";
 import CommonForm from "../common/Form";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useSelector } from "react-redux";
 
 function AdminOrdersDetailsView() {
-
   const [ formData, setFormData ] = useState({status : ''})
+  const { orderDetails } = useSelector(state=>state.adminOrder)
 
   function handleUpdateStatus(e){
     e.preventDefault()
   }
 
+  console.log(orderDetails);
+  
   return (
     <DialogContent className="sm:max-w[600px]">
       <DialogTitle className="sr-only">Status</DialogTitle>
@@ -19,29 +22,35 @@ function AdminOrdersDetailsView() {
         <div className="grid gap-2">
           <div className="flex items-center justify-between mt-6">
             <p className="font-medium">Order Id</p>
-            <Label>123456</Label>
+            <Label>{orderDetails?._id}</Label>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="font-medium">Order Date</p>
-            <Label>28/23/2024</Label>
+            <Label>{orderDetails?.orderDate.split('T')[0]}</Label>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="font-medium">Order Price</p>
-            <Label>$200</Label>
+            <Label>${orderDetails?.totalAmount}</Label>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="font-medium">Order Status</p>
-            <Label>in process</Label>
+            <Label>{orderDetails?.orderStatus}</Label>
           </div>
         </div>
         <div className="grid gap-2">
           <div className="grid gap-2">
             <div className="font-medium">Order Details</div>
             <ul className="grid gap-3">
-              <li className="flex items-center justify-between">
-                <span>Product One</span>
-                <span>$100</span>
-              </li>
+              {
+                orderDetails?.cartItems && orderDetails?.cartItems > 0 &&
+                orderDetails?.cartItems.map(items=>(
+                  <li className="flex items-center justify-between">
+                    <span>Title : {items?.title}</span>
+                    <span>Quantity : {items?.quantity}</span>
+                    <span>Price : ${items?.price}</span>
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </div>
