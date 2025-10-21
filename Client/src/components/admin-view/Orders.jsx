@@ -15,12 +15,12 @@ function AdminOrdersView() {
 
   function handleFetchOrderDetails(getId){
     setOpenDetailsDialog(true)
-    dispatch(getOrderDetailsForAdmin(getId)).then(data=>console.log(data,getId))
+    dispatch(getOrderDetailsForAdmin(getId))
   }
 
   function handleViewDetails(){
-    dispatch(resetAdminOrderDetails())
     setOpenDetailsDialog(false)
+    dispatch(resetAdminOrderDetails())
   }
 
   useEffect(()=>{
@@ -58,7 +58,7 @@ function AdminOrdersView() {
                     <Button onClick={()=>handleFetchOrderDetails(orderItems?._id)}>
                       View Details
                     </Button>
-                    <Dialog open={openDetailsDialog} onOpenChange={()=>handleViewDetails}>
+                    <Dialog open={openDetailsDialog} onOpenChange={handleViewDetails}>
                       <AdminOrdersDetailsView />
                     </Dialog>
                   </TableCell>

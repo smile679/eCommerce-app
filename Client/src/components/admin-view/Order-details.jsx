@@ -4,10 +4,12 @@ import { useState } from "react";
 import CommonForm from "../common/Form";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useSelector } from "react-redux";
+import { Separator } from "../ui/separator";
 
 function AdminOrdersDetailsView() {
   const [ formData, setFormData ] = useState({status : ''})
   const { orderDetails } = useSelector(state=>state.adminOrder)
+  const { user } = useSelector(state=>state.auth)
 
   function handleUpdateStatus(e){
     e.preventDefault()
@@ -54,19 +56,21 @@ function AdminOrdersDetailsView() {
             </ul>
           </div>
         </div>
+        <Separator />
         <div className="grid gap-2">
           <div className="grid gap-2">
             <div className="font-medium">Shipping Info</div>
-            <div className="grid gap-0.5 text-muted-foreground">
-              <span>Jhon esu</span>
-              <span>Address</span>
-              <span>City</span>
-              <span>Pincode</span>
-              <span>Phone</span>
-              <span>notes</span>
+            <div className="grid grid-cols-2 gap-0.5 text-muted-foreground">
+              <span>Username : {user?.name}</span>
+              <span>Address : {orderDetails?.addressInfo?.address}</span>
+              <span>City : {orderDetails?.addressInfo?.city}</span>
+              <span>Pincode : {orderDetails?.addressInfo?.pincode}</span>
+              <span>Phone : {orderDetails?.addressInfo?.phone}</span>
+              <span>Notes : {orderDetails?.addressInfo?.notes}</span>
             </div>
           </div>
         </div>
+        <Separator />
         <div>
           {
             <CommonForm
