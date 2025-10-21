@@ -66,7 +66,6 @@ function AdminOrdersView() {
               )
               )
             }
-             
           </TableBody>
         </Table>
       </CardContent>
