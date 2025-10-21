@@ -15,8 +15,6 @@ function AdminOrdersDetailsView() {
     e.preventDefault()
   }
 
-  console.log(orderDetails);
-  
   return (
     <DialogContent className="sm:max-w[600px]">
       <DialogTitle className="sr-only">Status</DialogTitle>
@@ -40,11 +38,12 @@ function AdminOrdersDetailsView() {
           </div>
         </div>
         <div className="grid gap-2">
+          <Separator />
           <div className="grid gap-2">
             <div className="font-medium">Order Details</div>
             <ul className="grid gap-3">
               {
-                orderDetails?.cartItems && orderDetails?.cartItems > 0 &&
+                orderDetails?.cartItems && orderDetails?.cartItems?.length > 0 &&
                 orderDetails?.cartItems.map(items=>(
                   <li className="flex items-center justify-between">
                     <span>Title : {items?.title}</span>
@@ -61,7 +60,7 @@ function AdminOrdersDetailsView() {
           <div className="grid gap-2">
             <div className="font-medium">Shipping Info</div>
             <div className="grid grid-cols-2 gap-0.5 text-muted-foreground">
-              <span>Username : {user?.name}</span>
+              <span>Username : {user?.username}</span>
               <span>Address : {orderDetails?.addressInfo?.address}</span>
               <span>City : {orderDetails?.addressInfo?.city}</span>
               <span>Pincode : {orderDetails?.addressInfo?.pincode}</span>
