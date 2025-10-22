@@ -7,7 +7,7 @@ import { Dialog, DialogHeader } from '../ui/dialog'
 import { useDispatch ,useSelector } from 'react-redux'
 import { getAllOrdersForAdmin, getOrderDetailsForAdmin, resetAdminOrderDetails } from "../../store/admin/order-slice";
 
-
+ 
 function AdminOrdersView() {
   const [ openDetailsDialog ,setOpenDetailsDialog ] = useState(false)
   const { orderList, orderDetails } = useSelector(state=>state.adminOrder)
