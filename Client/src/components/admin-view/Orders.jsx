@@ -59,7 +59,7 @@ function AdminOrdersView() {
                       View Details
                     </Button>
                     <Dialog open={openDetailsDialog} onOpenChange={handleViewDetails}>
-                      <AdminOrdersDetailsView />
+                      <AdminOrdersDetailsView setOpenDetailsDialog={setOpenDetailsDialog}/>
                     </Dialog>
                   </TableCell>
                 </TableRow>

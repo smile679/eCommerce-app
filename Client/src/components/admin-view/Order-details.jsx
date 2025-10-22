@@ -3,16 +3,30 @@ import { DialogContent } from "../ui/dialog";
 import { useState } from "react";
 import CommonForm from "../common/Form";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Separator } from "../ui/separator";
+import { getAllOrdersForAdmin, getOrderDetailsForAdmin, updateOrderStatus } from "../../store/admin/order-slice";
 
-function AdminOrdersDetailsView() {
+function AdminOrdersDetailsView({ setOpenDetailsDialog }) {
   const [ formData, setFormData ] = useState({status : ''})
   const { orderDetails } = useSelector(state=>state.adminOrder)
   const { user } = useSelector(state=>state.auth)
+  const dispatch = useDispatch()
 
   function handleUpdateStatus(e){
     e.preventDefault()
+    dispatch(updateOrderStatus({
+      id : orderDetails?._id,
+      orderStatus : formData.status
+    })).then(data=>{
+      if(data?.payload?.success){
+        dispatch(getOrderDetailsForAdmin(orderDetails?._id))
+        dispatch(getAllOrdersForAdmin())
+        setFormData({status : false})
+        setOpenDetailsDialog(false)
+      }
+    }
+    )
   }
 
   return (
