@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
 import { Sheet, SheetTrigger, SheetContent } from "../ui/sheet";
 import {
@@ -22,6 +22,8 @@ import { Label } from "../ui/label";
 
 function MenuItems() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams,setSearchParams ] = useSearchParams()
 
   function handleNavigate(getCurrentItem){
     sessionStorage.removeItem('filters')
@@ -30,8 +32,11 @@ function MenuItems() {
       category : [getCurrentItem.id]
     } : null;
 
-    sessionStorage.setItem('filters', JSON.stringify(currentItem))
+    location.pathname.includes("listing") && currentItem !== null ?
+    setSearchParams(new URLSearchParams(`?category=${getCurrentItem.id}`)) :
     navigate(getCurrentItem.path)
+
+    sessionStorage.setItem('filters', JSON.stringify(currentItem))
   }
 
   return (
@@ -51,9 +56,10 @@ function MenuItems() {
 
 function HeaderRightContent() {
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.shopCart);
   const [openCartSheet, setOpenCartSheet] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
 
   function handleLogout(){
     dispatch(logoutUser())
@@ -66,9 +72,10 @@ function HeaderRightContent() {
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-5">
       <Sheet open={openCartSheet} onOpenChange={()=>setOpenCartSheet(false)}>
-        <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon'>
+        <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon' className='relative'>
           <ShoppingCart className="w-6 h-6" />
           <span className="sr-only">User Cart</span>
+          <span className="absolute -top-2 -right-1 font-bold text-sm text-white bg-black px-1 rounded-full">{cartItems?.items.length || '0'}</span>
         </Button>
         <UserCartWrapper setOpenCartSheet={setOpenCartSheet}/>
       </Sheet>
