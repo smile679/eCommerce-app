@@ -101,7 +101,7 @@ function Checkout() {
             <div className="mt-4 w-full">
               <Button disabled={!(cartItems?.items?.length > 0)}
                 onClick={()=>handleInitiatePaypalPayment()}
-                className='w-full'>Checkout with paypal</Button>
+                className='w-full'>{ isPaymentStart ? "Processing paypal payment..." : "Checkout with paypal"}</Button>
             </div>
         </div>
       </div>

@@ -78,9 +78,9 @@ function Address({ currentSelectedAddress ,setCurrentSelectedAddress}) {
 
   return (
     <Card>
-      <div className="mb-5 p-3 grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div className="mb-5 p-3 grid grid-cols-2 lg:grid-cols-3 gap-2">
         {addressList && addressList.length > 0
-          ? addressList.map((items) => 
+          ? addressList.map((items) =>
           <AddressCard
             addressInfo={items}
             handleEditAddress={handleEditAddress}

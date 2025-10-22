@@ -29,9 +29,15 @@ function AddressCard({
         <Label>PHONE : {addressInfo?.phone}</Label>
         <Label>NOTES : {addressInfo?.notes}</Label>
       </CardContent>
-      <CardFooter className="flex pt-0 justify-between">
-        <Button onClick={() => handleEditAddress(addressInfo)}>Edit</Button>
-        <Button onClick={() => handleDeleteAddress(addressInfo?._id)}>
+      <CardFooter className="flex max-[390px]:flex-col  py-0 px-1.5 justify-between">
+        <Button 
+          onClick={() => handleEditAddress(addressInfo)}
+          className="max-[390px]:w-full mb-1"
+        >Edit</Button>
+        <Button 
+          onClick={() => handleDeleteAddress(addressInfo?._id)}
+          className="max-[390px]:w-full"
+        >
           Delete
         </Button>
       </CardFooter>
