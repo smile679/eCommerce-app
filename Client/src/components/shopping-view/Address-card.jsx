@@ -18,8 +18,10 @@ function AddressCard({
       <CardContent className="grid p-4 gap-4">
         {
          currentSelectedAddress && currentSelectedAddress?._id === addressInfo?._id ?
-          <Check className="w-4 h-4 absolute top-4 right-4" />
-         : null
+          <Check className="w-4 h-4 absolute top-4 right-4" /> :
+          <Button className="w-15 h-5 text-sm absolute top-2 right-4">
+            select
+          </Button>
         }
         <Label>ADDRESS : {addressInfo?.address}</Label>
         <Label>CITY : {addressInfo?.city}</Label>

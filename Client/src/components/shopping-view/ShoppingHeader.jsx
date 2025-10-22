@@ -75,7 +75,7 @@ function HeaderRightContent() {
         <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon' className='relative'>
           <ShoppingCart className="w-6 h-6" />
           <span className="sr-only">User Cart</span>
-          <span className="absolute -top-2 -right-1 font-bold text-sm text-white bg-black px-1 rounded-full">{cartItems?.items.length || '0'}</span>
+          <span className="absolute -top-2 -right-1 font-bold text-sm text-white bg-black px-1 rounded-full">{cartItems?.items?.length || '0'}</span>
         </Button>
         <UserCartWrapper setOpenCartSheet={setOpenCartSheet}/>
       </Sheet>
