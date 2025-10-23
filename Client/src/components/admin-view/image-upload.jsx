@@ -57,6 +57,7 @@ function ProductImageUpload({
   useEffect(() => {
     if (imageFile) uploadImageToCloudinary(imageFile);
   }, [imageFile]);
+  
 
   return (
     <div className="w-full max-w-md mx-auto">
