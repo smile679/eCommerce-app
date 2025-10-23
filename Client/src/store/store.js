@@ -6,6 +6,7 @@ import shoppingProductSlice from './shop/products-slice/index'
 import shoppingCartSlice from './shop/cart-slice/index'
 import shopAddressSlice from './shop/address-slice/index'
 import shopOrderSlice from './shop/order-slice/index'
+import commonFeatureSlice from './common-slice/index'
 
 const store = configureStore({
   reducer : {
@@ -18,6 +19,7 @@ const store = configureStore({
     shopCart : shoppingCartSlice,
     shopAddress : shopAddressSlice,
     shopOrder : shopOrderSlice,
+    commonFeature : commonFeatureSlice,
   },
 })
 

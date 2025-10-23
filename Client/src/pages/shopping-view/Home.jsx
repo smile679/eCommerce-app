@@ -2,7 +2,7 @@ import {
   BabyIcon,
   ChevronsLeftIcon,
   ChevronsRightIcon,
-  CloudLightning,
+  CloudLightning, 
   Shirt,
   ShirtIcon,
   UmbrellaIcon,
@@ -21,6 +21,7 @@ import { Skeleton } from "../../components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
 import ProductDetailsDialog from "../../components/shopping-view/ProductDetails";
+import { getFeatureImages } from "../../store/common-slice";
 
 const categoriesWithIcons = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -47,6 +48,7 @@ function ShoppingHome() {
   const { productList, isLoading } = useSelector((state) => state.shopProducts);
   const { user } = useSelector((state) => state.auth);
   const { productDetails } = useSelector((state) => state.shopProducts);
+  const { featureImagesList } = useSelector(state=>state.commonFeature);
   const navigate = useNavigate();
 
   function handleNavigateToListingPage(currentItem, section) {
@@ -76,12 +78,14 @@ function ShoppingHome() {
   }
 
   useEffect(() => {
+    if (!featureImagesList || featureImagesList.length === 0) return;
+
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 5000);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImagesList?.length);
+    }, 3000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [featureImagesList]);
 
   useEffect(() => {
     dispatch(
@@ -97,12 +101,17 @@ function ShoppingHome() {
      setOpenDetailsDialog(true)
   }, [productDetails]);
 
+  useEffect(()=>{
+    dispatch(getFeatureImages())
+  },[dispatch])
+  
   return (
     <div className="w-full flex flex-col min-h-screen">
       <div className="relative w-full h-[550px] overflow-hidden">
-        {slides.map((slide, index) => (
+        {featureImagesList && featureImagesList.length > 0 &&
+        featureImagesList.map((imageItem, index) => (
           <img
-            src={slide}
+            src={imageItem.image}
             key={index}
             className={`${
               index === currentSlide ? "opacity-100" : "opacity-0"
@@ -115,7 +124,7 @@ function ShoppingHome() {
           className="absolute top-1/2 left-4"
           onClick={() =>
             setCurrentSlide(
-              (prevSlide) => (prevSlide - 1 + slides.length) % slides.length
+              (prevSlide) => (prevSlide - 1 + featureImagesList.length) % featureImagesList.length
             )
           }
         >
@@ -126,7 +135,7 @@ function ShoppingHome() {
           size="icon"
           className="absolute top-1/2 right-4"
           onClick={() =>
-            setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length)
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImagesList.length)
           }
         >
           <ChevronsRightIcon className="w-4 h-4" />

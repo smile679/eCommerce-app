@@ -13,7 +13,8 @@ function ProductImageUpload({
   uploadedImageUrl,
   setUploadedImageUrl,
   setImageLoadingState,
-  imageLoadingState
+  imageLoadingState,
+  isCustomStyle = false,
 }) {
   const inputRef = useRef(null);
 
@@ -44,9 +45,9 @@ function ProductImageUpload({
   const uploadImageToCloudinary = async (imageFile) => {
     setImageLoadingState(true);
     const data = new FormData();
-    data.append("file_path", imageFile);
+    data.append("file_path", imageFile)
     const response = await axios.post(
-      "http://localhost:5000/api/admin/products/upload-image",
+      `${import.meta.env.VITE_API_URL}/api/admin/products/upload-image`,
       data
     );
     setImageLoadingState(false);
@@ -60,7 +61,7 @@ function ProductImageUpload({
   
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className={`w-full ${isCustomStyle ? '' : 'max-w-md mx-auto'}`}>
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
       <div
         onDrop={handleDrop}
