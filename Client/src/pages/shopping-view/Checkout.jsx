@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { useState } from "react";
 import { createNewOrder } from "../../store/shop/order-slice";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 function Checkout() {
   const { cartItems } = useSelector((state) => state.shopCart);
@@ -61,13 +62,12 @@ function Checkout() {
       currentSelectedAddress ?
       dispatch(createNewOrder(orderData)).then(data=>{
         if(data?.payload?.success){
-          console.log(data);
           setIsPaymemntStart(true)
         } else {
           setIsPaymemntStart(false)
         }
       }
-      ) : alert('Please Add At Least address')
+      ) : toast('Please Add At Least address')
     }
 
     useEffect(()=>{

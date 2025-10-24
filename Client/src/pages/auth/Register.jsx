@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import CommonForm from '../../components/common/Form';
 import { registerUser } from '../../store/authSlice';
+import { toast } from 'sonner';
 
 const AuthRegister = ()=> {
   const initialState = { 
@@ -19,12 +20,11 @@ const AuthRegister = ()=> {
     e.preventDefault()
 
     dispatch( registerUser(formData)).then((data)=>{
-      console.log(data);
       if(data?.payload?.success){
-        alert(data?.payload?.message)
+        toast.error(`${data?.payload?.message}`);
         navigate("/auth/login")
       } else {
-        alert(data?.payload?.message || data?.error?.message)
+        toast.error(`${data?.payload?.message || data?.error?.message}`);
       }
     });
   }

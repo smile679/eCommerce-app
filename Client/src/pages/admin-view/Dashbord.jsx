@@ -28,8 +28,6 @@ function AdminDashboard() {
   useEffect(()=>{
     dispatch(getFeatureImages())
   }, [dispatch])
-
-  console.log(featureImagesList);
   
   return (
     <div>

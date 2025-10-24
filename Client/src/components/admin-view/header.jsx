@@ -7,7 +7,7 @@ function AdminHeader({ setOpen }) {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    dispatch(logoutUser())
   } 
 
   return (

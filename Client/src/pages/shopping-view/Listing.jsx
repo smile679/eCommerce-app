@@ -19,6 +19,7 @@ import ShoppingProductTile from "../../components/shopping-view/ShoppingProductT
 import { useSearchParams } from "react-router-dom";
 import ProductDetailsDialog from "../../components/shopping-view/ProductDetails";
 import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
+import { toast } from "sonner";
 
 function ShoppingListing() {
   const [sort, setSort] = useState(null);
@@ -32,7 +33,6 @@ function ShoppingListing() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   const categorySearchParams = searchParams.get('category')
-  console.log(categorySearchParams);
   
 
   function handleProductDetails(getProductId) {
@@ -77,7 +77,7 @@ function ShoppingListing() {
         (data) => {
           if(data?.payload?.success){
             dispatch(fetchCartItems({userId: user.id}))
-            alert(`Item successfully added`)
+            toast.success(`Item successfully added`)
           }
         }
       )

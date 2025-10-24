@@ -4,6 +4,7 @@ import CommonForm from '../../components/common/Form';
 import { loginFormControls } from '../../config';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../store/authSlice';
+import { toast } from "sonner"
 
 
 const AuthLogin = ()=> {
@@ -19,10 +20,9 @@ const AuthLogin = ()=> {
     e.preventDefault()
     dispatch(loginUser(formData)).then((data)=>{
       if(data?.payload?.success){
-        alert(data?.payload?.message)
+        toast.success(`${data?.payload?.message}`);
       } else {
-        alert(data?.payload?.message )
-        // console.log(data?.payload?.success, data?.payload?.message);
+        toast.error(`${data?.payload?.message}`);
       }
     }
   )

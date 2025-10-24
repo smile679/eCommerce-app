@@ -17,6 +17,7 @@ import {
   deleteProduct
 } from '../../store/admin/products-slice/index'
 import AdminProductTile from "../../components/admin-view/AdminProductTile";
+import { toast } from "sonner";
 
 const initialState = {
   image: null,
@@ -53,7 +54,7 @@ function AdminProducts() {
           setImageFile(null);
           setCurrentEditedId(null);
           setOpenCreateProductsDialog(false);
-          alert("Product edited successfully.");
+          toast.success("Product edited successfully.")
         }
       }) :
     dispatch(
@@ -64,7 +65,7 @@ function AdminProducts() {
           setFormData(initialState);
           setImageFile(null);
           setOpenCreateProductsDialog(false);
-          alert("Product added successfully.");
+          toast.success("Product added successfully.")
         }
       })
   };
@@ -79,6 +80,7 @@ function AdminProducts() {
     dispatch(deleteProduct(getProductId)).then(data=>{
         if(data.payload?.success){
           dispatch(fetchAllProducts())
+          toast.error("Product deleted successfully.")
         }
       })
   }

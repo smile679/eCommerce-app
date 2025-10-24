@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
 import ProductDetailsDialog from "../../components/shopping-view/ProductDetails";
 import { getFeatureImages } from "../../store/common-slice";
+import { toast } from "sonner";
 
 const categoriesWithIcons = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -41,7 +42,6 @@ const brandWithIcon = [
 ];
 
 function ShoppingHome() {
-  const slides = [bannerOne, bannerTwo, bannerThree];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [ openDetailsDialog ,setOpenDetailsDialog] = useState(false)
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ function ShoppingHome() {
       (data) => {
         if (data?.payload?.success) {
           dispatch(fetchCartItems({ userId: user.id }));
-          alert(`Item successfully added`);
+          toast.success(`Item successfully added`)
         }
       }
     );
