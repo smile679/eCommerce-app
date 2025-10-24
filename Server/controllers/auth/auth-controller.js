@@ -12,7 +12,7 @@ const registerUser =async (req, res)=>{
     if(checkUser){
       return res.json({
         success : false, 
-        message : 'You already have an account!'
+        message : 'You already have an account!',
       })
     }
 
