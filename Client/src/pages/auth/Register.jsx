@@ -21,7 +21,7 @@ const AuthRegister = ()=> {
 
     dispatch( registerUser(formData)).then((data)=>{
       if(data?.payload?.success){
-        toast.error(`${data?.payload?.message}`);
+        toast.success(`${data?.payload?.message}`);
         navigate("/auth/login")
       } else {
         toast.error(`${data?.payload?.message || data?.error?.message}`);
