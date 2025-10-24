@@ -18,19 +18,14 @@ import AuthRegister from "./pages/auth/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/authSlice";
-import { Skeleton } from "@/components/ui/skeleton"
-import { Loader2Icon, LoaderIcon } from "lucide-react";
+import { LoaderIcon } from "lucide-react";
 import PaypalReturnPage from "./pages/shopping-view/Paypal-return";
 import PaypalCancelPage from "./pages/shopping-view/Paypal-cancel";
 import PaymentSuccessPage from "./pages/shopping-view/Payment-success";
 
 function App() {
-  // const isAuthenticated = true
-  // const isLoading = false
-  // const user = null
   const { user, isAuthenticated, isLoading } = useSelector((state)=> state.auth)
   const dispatch = useDispatch();
-  // console.log(user);
   
   useEffect(()=>{
     dispatch(checkAuth())
@@ -41,11 +36,19 @@ function App() {
       aria-label="Loading" width={30} height={30} className="items-center animate-spin"/>
       Loading..
   </div>
-  // <Skeleton className="w-[800px] bg-black rounded-full" />
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
+        <Route
+          path="/"
+          element={
+            <CheckAuth
+              isAuthenticated={isAuthenticated}
+              user={user}
+            ></CheckAuth>
+          }
+        />
         <Route path="/auth" element={
           <CheckAuth isAuthenticated={isAuthenticated} user={user}>
             <AuthLayout />
