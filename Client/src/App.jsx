@@ -26,9 +26,15 @@ import PaymentSuccessPage from "./pages/shopping-view/Payment-success";
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector((state)=> state.auth)
   const dispatch = useDispatch();
+
+  // we stored our token in sessionStorage for development only and 
+  // also its not allowed to store cookies in render.com in free trial
+  // so we are passing our token from sessionStorage
+  // use dispatch(checkAuth()) only in real projects
   
   useEffect(()=>{
-    dispatch(checkAuth())
+    const token = JSON.parse(sessionStorage.getItem("token"))
+    dispatch(checkAuth(token))
   },[dispatch])
 
   if(isLoading) return <div className="w-full min-h-screen flex justify-center items-center">

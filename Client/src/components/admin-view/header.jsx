@@ -2,12 +2,19 @@ import { AlignJustify, LogOut } from "lucide-react";
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/store/authSlice";
+import { resetTokenAndCredentials } from "../../store/authSlice";
+import { Navigate } from "react-router-dom";
 
 function AdminHeader({ setOpen }) {
   const dispatch = useDispatch();
+  const navigate = Navigate()
 
   function handleLogout() {
-    dispatch(logoutUser())
+    // dispatch(logoutUser()) use this in real projects when you buy domain names
+    // to clear cookies but now we need to clear our token from sessionStorage
+    dispatch(resetTokenAndCredentials())
+    sessionStorage.clear()
+    navigate('/auth/login')
   } 
 
   return (

@@ -11,7 +11,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import { logoutUser } from "../../store/authSlice";
+import { logoutUser, resetTokenAndCredentials } from "../../store/authSlice";
 import { useDispatch } from 'react-redux'
 import { shoppingViewHeaderMenuItems } from "../../config";
 import { useSelector } from "react-redux";
@@ -62,7 +62,11 @@ function HeaderRightContent() {
   const dispatch = useDispatch();  
 
   function handleLogout(){
-    dispatch(logoutUser())
+    // dispatch(logoutUser()) use this in real projects when you buy domain names
+    // to clear cookies but now we need to clear our token from sessionStorage
+    dispatch(resetTokenAndCredentials())
+    sessionStorage.clear()
+    navigate('/auth/login')
   }
 
   useEffect(()=>{

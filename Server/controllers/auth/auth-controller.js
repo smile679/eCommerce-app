@@ -71,15 +71,32 @@ const loginUser =async (req, res)=>{
         username : checkUser.username,
       }, 'CLIENT_SECRET_KEY',{expiresIn : '1000m'})
 
-      res.cookie('token', token, {httpOnly : true, secure : false}).json({
+      //storing cookies are not allowed in render so
+      // we need to buy domain name to store cookies if we buy we will use first option
+
+      // res.cookie('token', token, {httpOnly : true, secure : true}).json({
+      //   success : true,
+      //   message : "user successfully logged in",
+      //   user : {
+      //     id : checkUser._id,
+      //     email : checkUser.email,
+      //     role: checkUser.role,
+      //     username : checkUser.username,
+      //   },  
+      // })
+
+      //option two passing our token ot front and storing our token in session storage
+
+      res.status(200).json({
         success : true,
-        message : "user successfully logged in",
+        message : 'user successfully logged in',
+        token,
         user : {
           id : checkUser._id,
           email : checkUser.email,
           role: checkUser.role,
           username : checkUser.username,
-        },  
+        },
       })
 
   }catch(error){
@@ -103,8 +120,12 @@ const logoutUser =(req, res)=>{
 
 //auth midleware
 
-const authMiddleware =async (req, res, next)=>{
-  const token = req.cookies.token;
+// we use this req.cookies.token when we buy domain name and get our cookie
+
+const authMiddleware = async(req, res, next)=>{
+  // const token = req.cookies.token;
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
 
   if(!token){
     return res.status(401).json({
