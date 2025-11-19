@@ -3,11 +3,11 @@ import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/store/authSlice";
 import { resetTokenAndCredentials } from "../../store/authSlice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AdminHeader({ setOpen }) {
   const dispatch = useDispatch();
-  const navigate = Navigate()
+  const navigate = useNavigate()
 
   function handleLogout() {
     // dispatch(logoutUser()) use this in real projects when you buy domain names
