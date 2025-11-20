@@ -1,13 +1,6 @@
 import {
-  BabyIcon,
-  Check,
   ChevronsLeftIcon,
   ChevronsRightIcon,
-  CloudLightning, 
-  Shirt,
-  ShirtIcon,
-  UmbrellaIcon,
-  WatchIcon,
 } from "lucide-react";;
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";

@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom";
-import login from "../../assets/login.png"
-
 
 function AuthLayout () {
   return (
@@ -10,7 +8,7 @@ function AuthLayout () {
           <h1 className="w-full text-xl md:text-2xl lg:text-3xl font-extrabold ">
             <span>Welcome</span> <br/> to Merkato ECommerce Shopping
           </h1>
-          <img src={login} className="w-full"/>
+          <img src={"https://res.cloudinary.com/dineyc77u/image/upload/v1763649623/login_rreohv.png"} className="w-full"/>
         </div>
       </div>
       <div className="flex flex-1 items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
