@@ -1,5 +1,6 @@
 import {
   BabyIcon,
+  Check,
   ChevronsLeftIcon,
   ChevronsRightIcon,
   CloudLightning, 
@@ -7,10 +8,7 @@ import {
   ShirtIcon,
   UmbrellaIcon,
   WatchIcon,
-} from "lucide-react";
-import bannerOne from "../../assets/banner-1.webp";
-import bannerTwo from "../../assets/banner-2.webp";
-import bannerThree from "../../assets/banner-3.webp";
+} from "lucide-react";;
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { useEffect, useState } from "react";
@@ -25,23 +23,23 @@ import { getFeatureImages } from "../../store/common-slice";
 import { toast } from "sonner";
 
 const categoriesWithIcons = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
-  { id: "kids", label: "Kids", icon: BabyIcon },
-  { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+  { id: "men", label: "Men", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763638996/Pngtree_mens_dark_gray_suit_with_14745691_jebcvr.png" },
+  { id: "women", label: "Women", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763638710/pngwing.com_12_mppbmr.png" },
+  { id: "kids", label: "Kids", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763638692/pngwing.com_14_mgkqbt.png" },
+  { id: "accessories", label: "Accessories", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763639412/Pngtree_essential_android_mobile_accessories_to_21154861_rmaucs.png" },
+  { id: "footwear", label: "Footwear", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763639357/pngwing.com_15_mmodij.png" },
 ];
 
 const brandWithIcon = [
-  { id: "nike", label: "Nike", icon: ShirtIcon },
-  { id: "adidas", label: "Adidas", icon: ShirtIcon },
-  { id: "puma", label: "Puma", icon: ShirtIcon },
-  { id: "levi", label: "Levi's", icon: ShirtIcon },
-  { id: "zara", label: "Zara", icon: ShirtIcon },
-  { id: "h&m", label: "H&M", icon: ShirtIcon },
+  { id: "nike", label: "Nike", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763636182/pngwing.com_5_lx2apy.png" },
+  { id: "adidas", label: "Adidas", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763636194/pngwing.com_7_ukqcvx.png" },
+  { id: "puma", label: "Puma", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763636201/pngwing.com_8_gvzrqw.png" },
+  { id: "levi", label: "Levi's", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763636207/pngwing.com_9_qrqqjn.png" },
+  { id: "zara", label: "Zara", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763636234/pngwing.com_10_z5vcn6.png" },
+  { id: "h&m", label: "H&M", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763636225/pngwing.com_11_iprpro.png" },
 ];
 
-function ShoppingHome() {
+function ShoppingHome(){
   const [currentSlide, setCurrentSlide] = useState(0);
   const [ openDetailsDialog ,setOpenDetailsDialog] = useState(false)
   const dispatch = useDispatch();
@@ -143,7 +141,7 @@ function ShoppingHome() {
       </div>
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-orange-400">
             Shop by category
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -152,11 +150,12 @@ function ShoppingHome() {
                 onClick={() =>
                   handleNavigateToListingPage(categoryItem, "category")
                 }
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+                className="h-50 flex justify-center items-center cursor-pointer hover:shadow-lg transition-shadow hover:scale-110"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{categoryItem.label}</span>
+                  {/* <categoryItem.icon className="w-12 h-12 mb-4 text-green-400" /> */}
+                  <img src={categoryItem.icon} alt="brand" className="w-full h-50 object-center object-contain"/>
+                  <span className="font-bold text-orange-400 sr-only">{categoryItem.label}</span>
                 </CardContent>
               </Card>
             ))}
@@ -165,16 +164,16 @@ function ShoppingHome() {
       </section>
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Shop by brand</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-orange-400">Shop by Brand</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {brandWithIcon.map((brandItem) => (
               <Card
                 onClick={() => handleNavigateToListingPage(brandItem, "brand")}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+                className="flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow hover:scale-110"
               >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{brandItem.label}</span>
+                <CardContent className="flex flex-col items-center justify-center">
+                  <img src={brandItem.icon} alt="" />
+                  <span className="font-bold sr-only">{brandItem.label}</span>
                 </CardContent>
               </Card>
             ))}

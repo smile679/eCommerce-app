@@ -44,7 +44,7 @@ function MenuItems() {
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
           key={menuItem.id}
-          className="text-sm font-medium cursor-pointer hover:-translate-y-0.5"
+          className="text-sm font-semibold cursor-pointer hover:-translate-y-0.5"
           onClick={()=>handleNavigate(menuItem)}
         >
           {menuItem.label}
@@ -70,6 +70,7 @@ function HeaderRightContent() {
   }
 
   useEffect(()=>{
+    if(user) return;
     dispatch(fetchCartItems({userId : user.id}))
   },[dispatch])
 
@@ -77,16 +78,16 @@ function HeaderRightContent() {
     <div className="flex lg:items-center lg:flex-row flex-col gap-5">
       <Sheet open={openCartSheet} onOpenChange={()=>setOpenCartSheet(false)}>
         <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon' className='relative'>
-          <ShoppingCart className="w-6 h-6" />
+          <ShoppingCart strokeWidth="2.5" className="w-6 h-6 text-green-400" />
           <span className="sr-only">User Cart</span>
-          <span className="absolute -top-2 -right-1 font-bold text-sm text-white bg-black px-1 rounded-full">{cartItems?.items?.length || '0'}</span>
+          <span className="absolute -top-2 -right-1 font-bold text-sm text-white bg-orange-400 px-1 rounded-full">{cartItems?.items?.length || '0'}</span>
         </Button>
         <UserCartWrapper setOpenCartSheet={setOpenCartSheet}/>
       </Sheet>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black cursor-pointer">
-            <AvatarFallback className="bg-black text-white font-extrabold">
+          <Avatar className="bg-green-400 cursor-pointer">
+            <AvatarFallback className="bg-green-400 text-white font-extrabold">
               {user?.username[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -115,8 +116,11 @@ function ShoppingHeader() {
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
-          <HousePlug className="h-6 w-6" />
-          <span className="font-bold">Ecommerce</span>
+          <img 
+          src={"https://res.cloudinary.com/dineyc77u/image/upload/v1763633845/Gemini_Generated_Image_6b093b6b093b6b09-removebg-preview_sjsgje.png"}
+           alt=""
+           className="w-50"
+          />
         </Link>
         <Sheet>
           <SheetTrigger asChild>

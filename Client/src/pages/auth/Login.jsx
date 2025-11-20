@@ -34,9 +34,9 @@ const AuthLogin = ()=> {
           Sign in to your account
         </h1>
         <p className="mt-2">
-          Don't have an account
+          Don't have an account ?
           <Link
-            className="font-medium ml-2 text-primary hover:underline"
+            className="ml-2 hover:underline font-bold text-orange-400"
             to="/auth/register"
           >
             Sign Up
