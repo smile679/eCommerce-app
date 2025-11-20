@@ -1,9 +1,3 @@
-import fb from "../../assets/fb.png";
-import instagram from "../../assets/instagram.png";
-import pinterest from "../../assets/pinterest.png";
-import whatsApp from "../../assets/whatsApp.png";
-import { Separator } from "@/components/ui/separator";
-import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -12,54 +6,6 @@ function Footer() {
         <svg class="absolute -top-2 left-0 w-full h-10" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M0,0 L110,0C35,150 35,0 0,100z" fill="#ffffff"></path>
         </svg>
-        {/* <div className="w-full max-w-7xl mx-auto flex max-sm:flex-col justify-between items-center pt-5">
-          <Link
-            to="/shop/home"
-            smooth={true}
-            duration={500}
-            className="cursor-pointer max-sm:mb-5 items-center"
-          >
-            <img
-              src={"https://res.cloudinary.com/dineyc77u/image/upload/v1763633845/Gemini_Generated_Image_6b093b6b093b6b09-removebg-preview_sjsgje.png"}
-              alt="Merkato gebeya"
-              className="w-50"
-            />
-          </Link>
-          <div className="flex max-sm:flex-col items-center">
-            <h2 className="text-xl text-green-600 font-bold sm:mr-10">Follow us</h2>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={fb} alt="Facebook" className="w-10 h-10"/>
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={instagram} alt="Instagram" className="w-10 h-10" />
-              </a>
-              <a
-                href="https://www.pinterest.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={pinterest} alt="Pinterest" className="w-10 h-10" />
-              </a>
-              <a
-                href="https://www.whatsapp.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={whatsApp} alt="WhatsApp" className="w-12 h-12" />
-              </a>
-            </div>
-          </div>
-        </div> */}
-        {/* <Separator className="bg-chart-5 mx-auto w-11/12" /> */}
         <div className="w-full flex justify-evenly items-center my-10">
           <div className="flex flex-col gap-3">
             <h1 className="text-xl text-green-600 font-bold">About Us</h1>
