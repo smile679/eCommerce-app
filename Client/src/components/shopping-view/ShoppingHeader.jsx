@@ -86,8 +86,8 @@ function HeaderRightContent() {
       </Sheet>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-green-400 cursor-pointer">
-            <AvatarFallback className="bg-green-400 text-white font-extrabold">
+          <Avatar className="bg-orange-400 cursor-pointer">
+            <AvatarFallback className="bg-orange-400 text-white font-extrabold">
               {user?.username[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
