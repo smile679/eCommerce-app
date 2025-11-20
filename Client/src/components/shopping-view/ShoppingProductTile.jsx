@@ -6,13 +6,13 @@ import { brandOptionsMap, categoryOptionsMap } from "../../config";
 function ShoppingProductTile({ product, handleProductDetails, handleAddToCart }) {
 
   return (
-    <Card className="w-full max-w-sm mx-auto py-0">
+    <Card className="w-full flex justify-between max-w-sm mx-auto py-0 gap-0">
       <div onClick={() => handleProductDetails(product?._id)}>
         <div className="relative">
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-full h-[200px] object-cover rounded-t-lg"
+            className="w-full h-[250px] object-cover rounded-t-lg"
           />
           {product?.salePrice > 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-600 hover:bg-red-600 cursor-pointer">
@@ -20,7 +20,7 @@ function ShoppingProductTile({ product, handleProductDetails, handleAddToCart })
             </Badge>
           ) : null}
         </div>
-        <CardContent className="p-4">
+        <CardContent className="px-4 pt-2">
           <h2 className="text-xl font-bold mb-2">{product?.title}</h2>
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm text-muted-foreground">
@@ -48,7 +48,7 @@ function ShoppingProductTile({ product, handleProductDetails, handleAddToCart })
       </div>
       <CardFooter>
         <Button
-          className="w-full mb-3"
+          className="w-full mb-3 bg-orange-400 hover:bg-orange-500"
           onClick={() => handleAddToCart(product?._id)}
         >
           Add to cart

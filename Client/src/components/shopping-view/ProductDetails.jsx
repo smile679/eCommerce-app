@@ -78,7 +78,7 @@ function ProductDetailsDialog({ open, setOpen }) {
           </div>
           <div className="mt-5 mb-5">
             <Button
-              className="w-full"
+              className="w-full bg-orange-400 hover:bg-orange-500"
               onClick={() => handleAddToCart(productDetails?._id)}
             >
               Add To Cart
@@ -109,7 +109,7 @@ function ProductDetailsDialog({ open, setOpen }) {
             </div>
             <div className="mt-6 flex gap-2">
               <Input placeholder="Write a Review..." />
-              <Button>Submit</Button>
+              <Button className="bg-orange-400 hover:bg-orange-500">Submit</Button>
             </div>
           </div>
         </div>

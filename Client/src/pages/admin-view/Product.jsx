@@ -92,7 +92,10 @@ function AdminProducts() {
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
-        <Button onClick={() => setOpenCreateProductsDialog(true)}>
+        <Button 
+          onClick={() => setOpenCreateProductsDialog(true)}
+          className="bg-orange-400 hover:bg-orange-500"
+          >
           Add New Product
         </Button>
       </div>

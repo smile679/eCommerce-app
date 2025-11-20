@@ -27,7 +27,7 @@ const categoriesWithIcons = [
   { id: "women", label: "Women", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763638710/pngwing.com_12_mppbmr.png" },
   { id: "kids", label: "Kids", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763638692/pngwing.com_14_mgkqbt.png" },
   { id: "accessories", label: "Accessories", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763639412/Pngtree_essential_android_mobile_accessories_to_21154861_rmaucs.png" },
-  { id: "footwear", label: "Footwear", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763639357/pngwing.com_15_mmodij.png" },
+  { id: "footwear", label: "Footwear", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763644776/pngwing.com_16_-min_n0vrx6.png" },
 ];
 
 const brandWithIcon = [
@@ -182,7 +182,7 @@ function ShoppingHome(){
       </section>
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-orange-400">
             Shop by category
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

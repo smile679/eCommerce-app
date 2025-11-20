@@ -55,7 +55,9 @@ function ShoppingOrders() {
                   <TableCell>{orderItem?.orderStatus}</TableCell>
                   <TableCell>${orderItem?.totalAmount}</TableCell>
                   <TableCell>
-                    <Button onClick={()=>handleFetchOrderDetail(orderItem?._id)}>
+                    <Button
+                      className="bg-orange-400 hover:bg-orange-500"
+                      onClick={()=>handleFetchOrderDetail(orderItem?._id)}>
                       View Details
                     </Button>
                     <Dialog 

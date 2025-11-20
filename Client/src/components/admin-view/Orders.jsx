@@ -55,7 +55,10 @@ function AdminOrdersView() {
                   <TableCell>{orderItems?.orderStatus}</TableCell>
                   <TableCell>${orderItems?.totalAmount}</TableCell>
                   <TableCell>
-                    <Button onClick={()=>handleFetchOrderDetails(orderItems?._id)}>
+                    <Button 
+                      onClick={()=>handleFetchOrderDetails(orderItems?._id)}
+                      className="bg-orange-400 hover:bg-orange-500"
+                      >
                       View Details
                     </Button>
                     <Dialog open={openDetailsDialog} onOpenChange={handleViewDetails}>
