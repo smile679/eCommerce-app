@@ -1,4 +1,4 @@
-🛒 MERN eCommerce App
+🛒 Merkato Gebeya MERN eCommerce App
 
 A full-stack eCommerce platform built using MongoDB, Express, React, Node.js, Redux Toolkit, and integrated with PayPal for online payments.
 This project includes a complete admin dashboard, user shopping system, auth system, and robust route protection.
