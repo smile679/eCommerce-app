@@ -114,7 +114,7 @@ Shopping (Protected):
 
 🖼 Screenshots
 
-![Home Page]("https://res.cloudinary.com/dineyc77u/image/upload/v1763652914/nn1_vbmql6.jpg")
+![Home Page](https://res.cloudinary.com/dineyc77u/image/upload/v1763652914/nn1_vbmql6.jpg)
 ![category and Brand](https://res.cloudinary.com/dineyc77u/image/upload/v1763652914/nn2_apgwdx.jpg)
 ![Shopping List](https://res.cloudinary.com/dineyc77u/image/upload/v1763652914/nn3_yz6lwo.jpg)
 ![Shopping products list](https://res.cloudinary.com/dineyc77u/image/upload/v1763652913/nn5_g9e83e.jpg)
