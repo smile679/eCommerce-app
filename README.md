@@ -72,46 +72,6 @@ MongoDB + Mongoose  ,JWT Auth
 
 PayPal Integration
 
-🧭 Routes Overview
-Public:
-
-/ → Auto auth check
-
-/auth/login
-
-/auth/register
-
-/unauth-page
-
-* → 404 page
-
-Admin (Protected):
-
-/admin/dashboard
-
-/admin/products
-
-/admin/orders
-
-/admin/features
-
-Shopping (Protected):
-
-/shop/home
-
-/shop/listing
-
-/shop/checkout
-
-/shop/account
-
-/shop/paypal-return
-
-/shop/payment-success
-
-/shop/paypal-cancel
-
-
 🖼 Screenshots
 
 ![Home Page](https://res.cloudinary.com/dineyc77u/image/upload/v1763652914/nn1_vbmql6.jpg)
