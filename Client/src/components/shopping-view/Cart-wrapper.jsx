@@ -20,7 +20,7 @@ function UserCartWrapper({ setOpenCartSheet }) {
   
 
   return (
-    <SheetContent className="sm:max-w-md px-4">
+    <SheetContent className="sm:max-w-md px-4 overflow-y-auto">
       <SheetHeader>
         <SheetTitle className="font-bold">Your Cart</SheetTitle>
       </SheetHeader>
@@ -44,7 +44,7 @@ function UserCartWrapper({ setOpenCartSheet }) {
         setOpenCartSheet(false)
       }} 
       disabled={cartItems?.length < 1} 
-      className="w-full mt-5">
+      className="w-full mt-5 bg-orange-400 hover:bg-orange-500 mb-10">
         Checkout
       </Button>
     </SheetContent>

@@ -31,7 +31,7 @@ function Footer() {
         </div>
         <div className="w-full text-center mt-8 sm:mt-15">
           <p className="font-semibold pb-2">
-            &copy; 2025 Bakery. All rights reserved.
+            &copy; {new Date().getFullYear()} Merkato Gebeya. All rights reserved.
           </p>
         </div>
       </div>

@@ -14,6 +14,7 @@ import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
 import ProductDetailsDialog from "../../components/shopping-view/ProductDetails";
 import { getFeatureImages } from "../../store/common-slice";
 import { toast } from "sonner";
+import Footer from "../../components/shopping-view/Footer"
 
 const categoriesWithIcons = [
   { id: "men", label: "Men", icon: "https://res.cloudinary.com/dineyc77u/image/upload/v1763638996/Pngtree_mens_dark_gray_suit_with_14745691_jebcvr.png" },
@@ -106,7 +107,7 @@ function ShoppingHome(){
             key={index}
             className={`${
               index === currentSlide ? "opacity-100" : "opacity-0"
-            } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+            } absolute top-0 left-0 w-full h-full object-cover object-right transition-opacity duration-1000`}
           />
         ))}
         <Button
@@ -143,7 +144,7 @@ function ShoppingHome(){
                 onClick={() =>
                   handleNavigateToListingPage(categoryItem, "category")
                 }
-                className="h-50 flex justify-center items-center cursor-pointer hover:shadow-lg transition-shadow hover:scale-110"
+                className="h-30 sm:h-50 flex justify-center items-center cursor-pointer hover:shadow-lg transition-shadow hover:scale-110"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
                   {/* <categoryItem.icon className="w-12 h-12 mb-4 text-green-400" /> */}
@@ -155,14 +156,14 @@ function ShoppingHome(){
           </div>
         </div>
       </section>
-      <section className="py-12 bg-gray-50">
+      <section className="sm:py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8 text-orange-400">Shop by Brand</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {brandWithIcon.map((brandItem) => (
               <Card
                 onClick={() => handleNavigateToListingPage(brandItem, "brand")}
-                className="flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow hover:scale-110"
+                className="h-30 sm:h-50 flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow hover:scale-110"
               >
                 <CardContent className="flex flex-col items-center justify-center">
                   <img src={brandItem.icon} alt="" />
@@ -176,7 +177,7 @@ function ShoppingHome(){
       <section className="py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8 text-orange-400">
-            Shop by category
+            Shopping List
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {isLoading ? (
@@ -199,6 +200,7 @@ function ShoppingHome(){
             setOpen={setOpenDetailsDialog} 
           />
       </section>
+      <Footer />
     </div>
   );
 }

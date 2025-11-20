@@ -32,7 +32,7 @@ function UserCartItemsContent({ cartItems }) {
   }
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex justify-center items-center gap-5">
       <img
         src={cartItems?.image}
         alt={cartItems?.title}
