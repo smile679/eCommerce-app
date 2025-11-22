@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import img from "../../assets/account.jpg";
+import img from "../../assets/pinterest.png";
 import Address from "../../components/shopping-view/Address";
 import UserCartItemsContent from "../../components/shopping-view/UserCartItemContent";
 import { Button } from "../../components/ui/button";

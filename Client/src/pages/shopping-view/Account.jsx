@@ -1,7 +1,6 @@
-import accImg from "../../assets/account.jpg";
+import accImg from "../../assets/pinterest.png";
 import Address from "../../components/shopping-view/Address";
 import ShoppingOrders from "../../components/shopping-view/Orders";
-import Orders from "../../components/shopping-view/Orders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 function Account() {
